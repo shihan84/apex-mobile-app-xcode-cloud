@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- No cleartext allowed -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Allow only secure HTTPS for your production domain -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">apps.iqonic.design</domain>
+    </domain-config>
+</network-security-config>

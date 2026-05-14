@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "903667670865",
+    "project_id": "apexprime-ott",
+    "storage_bucket": "apexprime-ott.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903667670865:android:817f109d6010dd17c53d70",
+        "android_client_info": {
+          "package_name": "com.apexprime.ott"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903667670865-0n4b7objgmilj3nijcj3c2v8urq7jab3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apexprime.ott",
+            "certificate_hash": "a8f829b2ebbb94fc43f55436e4aa52c503f2f85d"
+          }
+        },
+        {
+          "client_id": "903667670865-amn509gdkug9nf13uvu9j9on1lqeka8n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3x00Ape20iKQvPXT3kEvERP1pHUn5ZSU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903667670865-amn509gdkug9nf13uvu9j9on1lqeka8n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "903667670865-8c62706g1pmdka93rk1t33pp2jb4f1bm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.apexprime.ott"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903667670865:android:084e11c438c3cd77c53d70",
+        "android_client_info": {
+          "package_name": "com.apexprime.ott.tv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903667670865-c0ii1il0gbi727uohut861te5dbe7eg7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apexprime.ott.tv",
+            "certificate_hash": "db7f8d6aeff235d3ba5e6ab5bfab465415d17d2e"
+          }
+        },
+        {
+          "client_id": "903667670865-hlquu5skslsn4ed1k0moi14aqgfj8v0r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apexprime.ott.tv",
+            "certificate_hash": "a8f829b2ebbb94fc43f55436e4aa52c503f2f85d"
+          }
+        },
+        {
+          "client_id": "903667670865-amn509gdkug9nf13uvu9j9on1lqeka8n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3x00Ape20iKQvPXT3kEvERP1pHUn5ZSU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903667670865-amn509gdkug9nf13uvu9j9on1lqeka8n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "903667670865-8c62706g1pmdka93rk1t33pp2jb4f1bm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.apexprime.ott"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

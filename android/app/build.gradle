@@ -1,0 +1,113 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = file('../../key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '0'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0.0'
+}
+
+android {
+    namespace "com.apexprime.ott"
+    compileSdkVersion 36
+    ndkVersion "29.0.13599879"
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        applicationId "com.apexprime.ott"
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion 36
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+    }
+    packagingOptions {
+        jniLibs {
+            pickFirsts += ['lib/**/libc++_shared.so']
+        }
+        // Exclude unnecessary files to reduce APK size
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/*.kotlin_module'
+    }
+
+
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            resValue "xml", "network_security_config", "@xml/network_security_config_debug"
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            resValue "xml", "network_security_config", "@xml/network_security_config_release"
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:33.11.0"))
+    implementation 'com.google.android.gms:play-services-wallet:19.4.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation('com.google.android.exoplayer:exoplayer:2.19.1')
+    implementation "com.android.billingclient:billing-ktx:7.1.1"
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
+}
