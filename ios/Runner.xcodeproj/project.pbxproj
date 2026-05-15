@@ -11,6 +11,7 @@
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		5019CED6E75A464DD1AAB990 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F6D207E759C91316C7BD66A /* Pods_Runner.framework */; };
 		5D9C95DB2F02A62D0034C062 /* ImageNotification.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5D9C95D42F02A62D0034C062 /* ImageNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5D9C95E42F02A62D0034C062 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9C95E22F02A62D0034C062 /* NotificationService.swift */; };
 		5DAC7CA52CBF9D210040689B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DAC7CA42CBF9D210040689B /* GoogleService-Info.plist */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
@@ -78,28 +79,10 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE2567C5882B5A630B6C099E /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		F67CEAC1C81B398DF0FD1D6B /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
+		5D9C95E22F02A62D0034C062 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		5D9C95E32F02A62D0034C062 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		5D9C95DC2F02A62D0034C062 /* Exceptions for "ImageNotification" folder in "ImageNotification" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 5D9C95D32F02A62D0034C062 /* ImageNotification */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		5D9C95D52F02A62D0034C062 /* ImageNotification */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				5D9C95DC2F02A62D0034C062 /* Exceptions for "ImageNotification" folder in "ImageNotification" target */,
-			);
-			path = ImageNotification;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5D9C95D12F02A62D0034C062 /* Frameworks */ = {
@@ -200,6 +183,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5D9C95D52F02A62D0034C062 /* ImageNotification */ = {
+			isa = PBXGroup;
+			children = (
+				5D9C95E22F02A62D0034C062 /* NotificationService.swift */,
+				5D9C95E32F02A62D0034C062 /* Info.plist */,
+			);
+			path = ImageNotification;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -214,9 +206,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				5D9C95D52F02A62D0034C062 /* ImageNotification */,
 			);
 			name = ImageNotification;
 			productName = ImageNotification;
@@ -412,6 +401,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D9C95E42F02A62D0034C062 /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
