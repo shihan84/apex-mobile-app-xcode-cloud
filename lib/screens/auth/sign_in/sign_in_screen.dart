@@ -246,6 +246,10 @@ class SignInScreen extends StatelessWidget {
               controller: signInController.phoneCont,
               textFieldType: TextFieldType.PHONE,
               errorThisFieldRequired: locale.value.mobileNumberIsRequired,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) return locale.value.mobileNumberIsRequired;
+                return null;
+              },
               decoration: inputDecoration(
                 context,
                 border: InputBorder.none,

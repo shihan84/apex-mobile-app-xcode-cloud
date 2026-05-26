@@ -133,6 +133,14 @@ class SignInController extends BaseController {
 
   Future<void> onLoginPressed() async {
     if (isLoading.value || isOTPLoading.value) return;
+    
+    // Validate phone number
+    final String phoneNumber = phoneCont.text.trim().replaceAll(RegExp(r'[^0-9]'), '');
+    if (phoneNumber.isEmpty || phoneNumber.length < 5) {
+      errorSnackBar(error: locale.value.pleaseEnterAValidMobileNo);
+      return;
+    }
+    
     final bool isResending = Get.isBottomSheetOpen ?? false;
     if (isResending) {
       isOTPLoading(true);
@@ -143,7 +151,7 @@ class SignInController extends BaseController {
     final firebaseAuthUtil = FirebaseAuthUtil();
 
     firebaseAuthUtil.login(
-        mobileNumber: "+$countryCode${phoneCont.text}",
+        mobileNumber: "+${countryCode.value}$phoneNumber",
         onCodeSent: (value) {
           isOTPSent(true);
           verificationId(value);
@@ -352,9 +360,10 @@ class SignInController extends BaseController {
     }).catchError((e) {
       setLoading(false);
       String errorMessage = '';
-      if (e is GoogleSignInException &&
-          (e.code == GoogleSignInExceptionCode.uiUnavailable || e.code == GoogleSignInExceptionCode.userMismatch || e.code == GoogleSignInExceptionCode.clientConfigurationError)) {
-        errorMessage = e.description ?? 'Google sign in failed';
+      if (e is GoogleSignInException) {
+        errorMessage = '${e.code.name}: ${e.description ?? 'Google sign in failed'}';
+      } else {
+        errorMessage = e.toString();
       }
       if (errorMessage.isNotEmpty) errorSnackBar(error: errorMessage);
     }).whenComplete(() => setLoading(false));

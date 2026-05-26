@@ -18,12 +18,6 @@ class DashboardController extends GetxController {
       selectedIcon: Assets.iconsHouseFill,
     ),
     BottomBarItem(
-      title: () => locale.value.search,
-      icon: Assets.iconsMagnifyingGlass,
-      type: BottomItem.search.name,
-      selectedIcon: Assets.iconsMagnifyingGlassFill,
-    ),
-    BottomBarItem(
       title: () => locale.value.shorts,
       icon: Assets.iconsVideoCamera,
       type: BottomItem.shorts.name,
@@ -34,12 +28,6 @@ class DashboardController extends GetxController {
       icon: Assets.iconsMusicNote,
       type: BottomItem.music.name,
       selectedIcon: Assets.iconsMusicNoteFill,
-    ),
-    BottomBarItem(
-      title: () => locale.value.comingSoon,
-      icon: Assets.iconsConfetti,
-      type: BottomItem.comingsoon.name,
-      selectedIcon: Assets.iconsConfettiFill,
     ),
     if (appConfigs.value.enableLiveTv)
       BottomBarItem(
@@ -58,19 +46,11 @@ class DashboardController extends GetxController {
 
   @override
   void onInit() {
-    if (!appConfigs.value.enableMovie && !appConfigs.value.enableTvShow && !appConfigs.value.enableVideo) {
-      bottomNavItems.removeWhere((element) => element.type == BottomItem.comingsoon.name);
-    }
-
     currentIndex(0);
-
     super.onInit();
   }
 
   void addDataOnBottomNav() {
     bottomNavItems.refresh();
-    if (!appConfigs.value.enableMovie && !appConfigs.value.enableTvShow && !appConfigs.value.enableVideo && bottomNavItems.any((element) => element.type == BottomItem.comingsoon.name)) {
-      bottomNavItems.removeWhere((element) => element.type == BottomItem.comingsoon.name);
-    }
   }
 }
