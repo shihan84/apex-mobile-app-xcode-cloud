@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>YOUR_IOS_CLIENT_ID</string>
+	<string>903667670865-8c62706g1pmdka93rk1t33pp2jb4f1bm.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>YOUR_REVERSED_CLIENT_ID</string>
+	<string>com.googleusercontent.apps.903667670865-8c62706g1pmdka93rk1t33pp2jb4f1bm</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>YOUR_ANDROID_CLIENT_ID</string>
+	<string>903667670865-0n4b7objgmilj3nijcj3c2v8urq7jab3.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>YOUR_API_KEY</string>
+	<string>AIzaSyD7iQOIGqLUwE-RfDyFZ_ABinjMXVIgudM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>YOUR_GCM_SENDER_ID</string>
+	<string>903667670865</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>YOUR_BUNDLE_ID</string>
+	<string>com.apexprime.ott</string>
 	<key>PROJECT_ID</key>
-	<string>YOUR_PROJECT_ID</string>
+	<string>apexprime-ott</string>
 	<key>STORAGE_BUCKET</key>
-	<string>YOUR_STORAGE_BUCKET</string>
+	<string>apexprime-ott.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>YOUR_GOOGLE_APP_ID</string>
+	<string>1:903667670865:ios:6175085b6222ad2ec53d70</string>
 </dict>
 </plist>

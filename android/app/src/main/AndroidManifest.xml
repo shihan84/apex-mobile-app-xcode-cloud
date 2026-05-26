@@ -15,6 +15,9 @@
     <!-- This permission for flutter local notification in package permission  -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
+    <!-- This permission for advertising ID (Android 13+ requirement for Google Mobile Ads) -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+
     <!-- ================= Screen Size Support ================= -->
     <supports-screens
         android:smallScreens="true"
@@ -108,13 +111,8 @@
 
                 <data
                     android:scheme="https"
-                    android:host="apps.iqonic.design"
-                    android:pathPrefix="/streamit-laravel" />
-
-                <data
-                    android:scheme="https"
-                    android:host="apps.iqonic.design"
-                    android:pathPrefix="/streamit-platform" />
+                    android:host="apexprimetv.com"
+                    android:pathPrefix="/" />
 
                 <data android:scheme="http" />
             </intent-filter>

@@ -2,7 +2,7 @@ name: streamit_laravel
 description: "A new Flutter project."
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.7+11
+version: 1.0.11+15
 
 environment:
   sdk: ">=3.3.3 <4.0.0"
@@ -94,7 +94,7 @@ dependencies:
 
 
   open_file: ^3.5.10
-  screen_protector: ^1.4.2+1
+  screen_protector: 1.4.3
   # Encryption & Storage
   flutter_secure_storage: ^9.2.4
   encrypt: ^5.0.3
