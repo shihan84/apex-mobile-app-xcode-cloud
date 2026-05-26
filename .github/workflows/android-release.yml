@@ -6,6 +6,9 @@ on:
       - android
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     name: Build & Sign Android App Bundle
@@ -24,7 +27,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.32.1'
+          flutter-version: '3.41.6'
           channel: stable
           cache: true
 
@@ -32,17 +35,14 @@ jobs:
         run: flutter pub get
 
       - name: Decode keystore from secret
-        run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > apexprime-release-key.jks
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > apexprime-release-key.jks
 
       - name: Create key.properties
         run: |
-          cat > key.properties <<EOF
-          storePassword=${{ secrets.STORE_PASSWORD }}
-          keyPassword=${{ secrets.KEY_PASSWORD }}
-          keyAlias=${{ secrets.KEY_ALIAS }}
-          storeFile=${{ github.workspace }}/apexprime-release-key.jks
-          EOF
+          echo "storePassword=${{ secrets.STORE_PASSWORD }}" > key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> key.properties
+          echo "storeFile=${{ github.workspace }}/apexprime-release-key.jks" >> key.properties
 
       - name: Build App Bundle
         run: flutter build appbundle --release
@@ -50,7 +50,7 @@ jobs:
       - name: Get version from pubspec
         id: version
         run: |
-          VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //')
+          VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //' | tr -d '[:space:]')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Upload AAB artifact
