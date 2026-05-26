@@ -3,14 +3,10 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:streamit_laravel/components/app_scaffold.dart';
 import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
-
-import '../../utils/common_functions.dart';
 import 'music_controller.dart';
 import 'components/music_player.dart';
 import 'components/music_feed.dart';
 import 'components/playlist_card.dart';
-import 'models/music_model.dart';
 
 class MusicScreen extends StatefulWidget {
   MusicScreen({super.key});
@@ -76,8 +72,12 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                         : MusicFeed(
                             music: musicController.music,
                             onTrackTap: (track) {
-                              // TODO: Play music
-                              log('Tapped on track: ${track.title}');
+                              musicController.playMusic(track.id);
+                              Get.to(() => MusicPlayer(
+                                track: track,
+                                playlist: musicController.music.toList(),
+                                initialIndex: musicController.music.indexOf(track),
+                              ));
                             },
                             onLike: (track) {
                               musicController.likeMusic(track.id);
@@ -119,8 +119,16 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                           return PlaylistCard(
                             playlist: playlist,
                             onTap: () {
-                              // TODO: Navigate to playlist detail
-                              log('Tapped on playlist: ${playlist.name}');
+                              if (playlist.tracks != null && playlist.tracks!.isNotEmpty) {
+                                musicController.playMusic(playlist.tracks!.first.id);
+                                Get.to(() => MusicPlayer(
+                                  track: playlist.tracks!.first,
+                                  playlist: playlist.tracks!,
+                                  initialIndex: 0,
+                                ));
+                              } else {
+                                toast('No tracks in this playlist');
+                              }
                             },
                           );
                         },
@@ -137,8 +145,12 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                     : MusicFeed(
                         music: musicController.featuredMusic,
                         onTrackTap: (track) {
-                          // TODO: Play music
-                          log('Tapped on featured track: ${track.title}');
+                          musicController.playMusic(track.id);
+                          Get.to(() => MusicPlayer(
+                            track: track,
+                            playlist: musicController.featuredMusic.toList(),
+                            initialIndex: musicController.featuredMusic.indexOf(track),
+                          ));
                         },
                         onLike: (track) {
                           musicController.likeMusic(track.id);
