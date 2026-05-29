@@ -25,6 +25,11 @@ flutter pub get
 
 echo "Installing CocoaPods dependencies..."
 cd ios
+
+# Fix: Disable Flutter SPM so webview_flutter_wkwebview uses CocoaPods (google_mobile_ads dependency)
+flutter config --no-enable-ios-desktop
+flutter config --no-enable-macos-desktop
+
 pod install --repo-update
 
 echo "=== ci_post_clone.sh completed successfully ==="
