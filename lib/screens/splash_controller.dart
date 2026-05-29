@@ -69,9 +69,16 @@ class SplashScreenController extends BaseListController<WalkthroughModel> {
         getDeviceInfo(),
         getAppConfigurations().then(
           (value) async {
+            // Wait a minimal delay for UI to settle, then navigate
             await Future.delayed(
-              Duration(seconds: 8),
+              const Duration(milliseconds: 500),
               () async {
+                // Ensure config is loaded before navigating
+                if (appConfigs.value.status == false && appNotSynced.value) {
+                  // Config failed to load, but we have fallback defaults
+                  log('Using fallback configuration');
+                }
+
                 if (await getBoolFromLocal(SharedPreferenceConst.IS_FIRST_TIME, defaultValue: true)) {
                   Get.off(() => WalkThroughScreen(walkthroughPageList: listContent));
                   await setBoolToLocal(SharedPreferenceConst.IS_FIRST_TIME, false);
@@ -84,10 +91,26 @@ class SplashScreenController extends BaseListController<WalkthroughModel> {
             );
           },
         ).catchError((e) async {
+          log('Config error: $e');
           appNotSynced(!await getBoolFromLocal(SharedPreferenceConst.IS_APP_CONFIGURATION_SYNCED_ONCE));
+          // Navigate anyway with fallback config
+          await Future.delayed(
+            const Duration(milliseconds: 500),
+            () async {
+              if (await getBoolFromLocal(SharedPreferenceConst.IS_FIRST_TIME, defaultValue: true)) {
+                Get.off(() => WalkThroughScreen(walkthroughPageList: listContent));
+                await setBoolToLocal(SharedPreferenceConst.IS_FIRST_TIME, false);
+              } else if (await getBoolFromLocal(SharedPreferenceConst.IS_LOGGED_IN, defaultValue: false) || isLoggedIn.value) {
+                Get.off(() => WatchingProfileScreen(), arguments: true);
+              } else {
+                Get.offAll(() => DashboardScreen(), duration: const Duration(milliseconds: 500), curve: Curves.linearToEaseOut);
+              }
+            },
+          );
         }),
       ],
     ).catchError((e) {
+      log('Splash init error: $e');
       throw e;
     });
   }

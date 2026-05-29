@@ -51,7 +51,7 @@ class SignInScreen extends StatelessWidget {
                   8.height,
                   Text(locale.value.weHaveEagerlyAwaitedYourReturn, style: commonSecondaryTextStyle()),
                   48.height,
-                  Obx(() => signInController.isNormalLogin.value ? formFieldComponent(context) : otpLoginComponent(context)),
+                  formFieldComponent(context),
                 ],
               ),
             ),
@@ -97,19 +97,6 @@ class SignInScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 16,
               children: [
-                if (appConfigs.value.isOtpLoginEnabled)
-                  Obx(() {
-                    return SocialIconWidget(
-                      icon: signInController.isNormalLogin.value ? Assets.iconsPhone : Assets.iconsEnvelopeSimple,
-                      iconColor: primaryIconColor,
-                      buttonWidth: Get.width,
-                      iconSize: Size(22, 22),
-                      text: signInController.isNormalLogin.value ? locale.value.loginWithOtp : locale.value.loginWithEmail,
-                      onTap: () {
-                        signInController.isNormalLogin(!signInController.isNormalLogin.value);
-                      },
-                    );
-                  }),
                 SocialAuthComponent(),
               ],
             ),
@@ -236,88 +223,4 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  Widget otpLoginComponent(BuildContext context) {
-    return Column(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppTextField(
-              controller: signInController.phoneCont,
-              textFieldType: TextFieldType.PHONE,
-              errorThisFieldRequired: locale.value.mobileNumberIsRequired,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) return locale.value.mobileNumberIsRequired;
-                return null;
-              },
-              decoration: inputDecoration(
-                context,
-                border: InputBorder.none,
-                hintText: locale.value.mobileNumber,
-                contentPadding: EdgeInsets.only(left: 8, bottom: 12),
-                prefixIcon: InkWell(
-                  onTap: () {
-                    signInController.changeCountry(context);
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      8.width,
-                      Obx(
-                        () => Wrap(
-                          spacing: 4,
-                          children: [
-                            Text(
-                              signInController.selectedCountry.value.flagEmoji,
-                              style: commonPrimaryTextStyle(size: 16),
-                            ),
-                            Text(
-                              "+${signInController.countryCode.value}",
-                              style: commonPrimaryTextStyle(size: 16),
-                            ),
-                          ],
-                        ),
-                      ),
-                      6.width,
-                      IconWidget(imgPath: Assets.iconsCaretDown, size: 16),
-                      8.width,
-                      VerticalDivider(
-                        color: appColorPrimary,
-                        width: 2,
-                      ),
-                      8.width,
-                      Container(height: 18, width: 1, color: cardColor),
-                    ],
-                  ),
-                ),
-              ),
-              textStyle: commonPrimaryTextStyle(),
-              onChanged: (value) {
-                if (value.isNotEmpty) signInController.getBtnEnable();
-              },
-            ),
-          ],
-        ),
-        30.height,
-        Obx(
-          () => AppButton(
-            width: double.infinity,
-            text: locale.value.getVerificationCode,
-            color: appColorPrimary,
-            disabledColor: btnColor,
-            textStyle: appButtonTextStyleWhite,
-            shapeBorder: RoundedRectangleBorder(borderRadius: radius(defaultAppButtonRadius / 2)),
-            onTap: () {
-              if (signInController.signInformKey.currentState!.validate()) {
-                hideKeyboard(context);
-                signInController.onLoginPressed();
-              }
-            },
-          ),
-        ),
-        16.height,
-        MediaQuery.of(context).viewInsets.bottom.toInt().height,
-      ],
-    );
-  }
 }

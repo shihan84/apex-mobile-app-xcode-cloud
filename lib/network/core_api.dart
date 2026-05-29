@@ -33,9 +33,6 @@ import '../main.dart';
 import '../models/base_response_model.dart';
 import '../screens/auth/model/about_page_res.dart';
 import '../screens/coupon/model/coupon_list_model.dart';
-import '../screens/shorts/models/short_model.dart';
-import '../screens/music/models/music_model.dart';
-import '../screens/music/models/playlist_model.dart';
 import '../screens/subscription/model/subscription_plan_model.dart';
 import '../utils/api_end_points.dart';
 import '../utils/common_base.dart';
@@ -89,10 +86,57 @@ class CoreServiceApis {
             (error, stackTrace) {
               setBoolToLocal(SharedPreferenceConst.IS_APP_CONFIGURATION_SYNCED_ONCE, false);
 
+              // Load cached config if API fails
+              getCachedConfig().then((cachedConfig) {
+                if (cachedConfig != null) {
+                  appCurrency(cachedConfig.currency);
+                  appConfigs(cachedConfig);
+                  isSupportedDevice(cachedConfig.isDeviceSupported);
+                  isCastingAvailable(cachedConfig.isCastingAvailable);
+                } else {
+                  // Use default config if no cache available
+                  final defaultConfig = ConfigurationResponse(
+                    applicationURL: ApplicationURL(mobileAppUrl: MobileAppUrl()),
+                    currency: Currency(),
+                    bannerAds: BannerAds(),
+                    enableMovie: true,
+                    enableTvShow: true,
+                    enableLiveTv: true,
+                    enableVideo: true,
+                    enableContinueWatch: true,
+                    enableRateUs: false,
+                    isDeviceSupported: true,
+                    isCastingAvailable: false,
+                    isDownloadAvailable: false,
+                    isGoogleLoginEnabled: true,
+                    isAppleSocialLoginEnabled: true,
+                    isOtpLoginEnabled: true,
+                    isForceUpdate: false,
+                    enableDemoLogin: true,
+                  );
+                  appCurrency(defaultConfig.currency);
+                  appConfigs(defaultConfig);
+                  isSupportedDevice(defaultConfig.isDeviceSupported);
+                  isCastingAvailable(defaultConfig.isCastingAvailable);
+                }
+              });
+
               onError?.call();
             },
           ).whenComplete(() => loaderOnOff?.call(false));
         });
+  }
+
+  static Future<ConfigurationResponse?> getCachedConfig() async {
+    try {
+      final cachedJson = await getJsonFromLocal(SharedPreferenceConst.CACHE_CONFIGURATION_RESPONSE);
+      if (cachedJson != null) {
+        return ConfigurationResponse.fromJson(cachedJson);
+      }
+    } catch (e) {
+      log('Error loading cached config: $e');
+    }
+    return null;
   }
 
   static Future<DashboardDetailResponse> getDashboard() async {
