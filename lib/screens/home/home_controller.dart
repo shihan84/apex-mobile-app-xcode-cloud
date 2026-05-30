@@ -97,7 +97,20 @@ class HomeController extends BaseController {
       () {
         showCategoryShimmer(false);
       },
-    ).catchError((e) {
+    ).catchError((e) async {
+      log('Dashboard API error: $e');
+      // Load cached dashboard data if API fails
+      final cachedJson = await getJsonFromLocal(SharedPreferenceConst.CACHE_DASHBOARD_RESPONSE);
+      if (cachedJson != null) {
+        try {
+          final cachedData = DashboardModel.fromJson(cachedJson);
+          cachedDashboardDetailResponse = DashboardDetailResponse(data: cachedData);
+          await createCategorySections(cachedData, isFirstPage: true);
+          log('Loaded cached dashboard data');
+        } catch (cacheError) {
+          log('Error loading cached dashboard: $cacheError');
+        }
+      }
       showCategoryShimmer(false);
     });
   }
@@ -135,6 +148,7 @@ class HomeController extends BaseController {
         })
         .whenComplete(() => showCategoryShimmer(false))
         .catchError((e) {
+          log('Other dashboard API error: $e');
           isLastPage(false);
           showCategoryShimmer(false);
         });
