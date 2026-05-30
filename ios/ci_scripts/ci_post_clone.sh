@@ -27,7 +27,7 @@ echo "Installing CocoaPods dependencies..."
 cd ios
 
 # Fix: Disable Flutter SPM so webview_flutter_wkwebview uses CocoaPods (google_mobile_ads dependency)
-export FLUTTER_DISABLE_SPM=true
+flutter config --no-enable-swift-package-manager
 
 pod install --repo-update
 
