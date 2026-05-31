@@ -55,3 +55,14 @@ app.*.map.json
 *.apk
 *.ipa
 *.tar.gz
+
+# Credentials and sensitive files
+.env
+*.jks
+*.keystore
+google-services.json
+GoogleService-Info.plist
+CREDENTIALS.md
+credentials.json
+secrets.yaml
+CREDENTIALS_TEMPLATE.md
