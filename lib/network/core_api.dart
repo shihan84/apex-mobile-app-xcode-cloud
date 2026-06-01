@@ -173,6 +173,7 @@ class CoreServiceApis {
           endPoint: APIEndPoints.notificationCount,
           params: params,
         ),
+        manageApiVersion: true,
       ),
     );
 
@@ -314,6 +315,7 @@ class CoreServiceApis {
     return AccountSettingResponse.fromJson(
       await getApiResponse(
         "${APIEndPoints.accountSetting}$id",
+        manageApiVersion: true,
       ),
     ).data;
   }
@@ -346,6 +348,7 @@ class CoreServiceApis {
         APIEndPoints.saveRating,
         request: request,
         method: HttpMethodType.POST,
+        manageApiVersion: true,
       ),
     );
   }
@@ -356,6 +359,7 @@ class CoreServiceApis {
         APIEndPoints.deleteRating,
         request: request,
         method: HttpMethodType.POST,
+        manageApiVersion: true,
       ),
     );
   }
@@ -367,6 +371,7 @@ class CoreServiceApis {
         APIEndPoints.saveDownload,
         request: request,
         method: HttpMethodType.POST,
+        manageApiVersion: true,
       ),
     );
   }
@@ -378,6 +383,7 @@ class CoreServiceApis {
       await getApiResponse(
         getEndPoint(endPoint: APIEndPoints.deleteDownloads, params: params),
         method: HttpMethodType.POST,
+        manageApiVersion: true,
       ),
     );
   }
@@ -389,6 +395,7 @@ class CoreServiceApis {
         APIEndPoints.saveContinueWatch,
         request: request,
         method: HttpMethodType.POST,
+        manageApiVersion: true,
       ),
     );
   }
@@ -400,6 +407,7 @@ class CoreServiceApis {
         APIEndPoints.saveLikes,
         request: request,
         method: HttpMethodType.POST,
+        manageApiVersion: true,
       ),
     );
   }
@@ -411,6 +419,7 @@ class CoreServiceApis {
         APIEndPoints.saveWatchlist,
         request: request,
         method: HttpMethodType.POST,
+        manageApiVersion: true,
       ),
     );
   }
@@ -422,6 +431,7 @@ class CoreServiceApis {
         APIEndPoints.saveEntertainmentViews,
         request: request,
         method: HttpMethodType.POST,
+        manageApiVersion: true,
       ),
     );
   }
@@ -433,6 +443,7 @@ class CoreServiceApis {
         APIEndPoints.saveReminder,
         request: request,
         method: HttpMethodType.POST,
+        manageApiVersion: true,
       ),
     );
   }
@@ -444,6 +455,7 @@ class CoreServiceApis {
         APIEndPoints.deleteReminder,
         request: request,
         method: HttpMethodType.POST,
+        manageApiVersion: true,
       ),
     );
   }
@@ -455,6 +467,7 @@ class CoreServiceApis {
         APIEndPoints.saveSubscriptionDetails,
         request: request,
         method: HttpMethodType.POST,
+        manageApiVersion: true,
       ),
     );
   }
@@ -466,6 +479,7 @@ class CoreServiceApis {
         APIEndPoints.cancelSubscription,
         request: request,
         method: HttpMethodType.POST,
+        manageApiVersion: true,
       ),
     );
   }
@@ -480,6 +494,7 @@ class CoreServiceApis {
     final genresDetails = GenresResponse.fromJson(
       await getApiResponse(
         "${APIEndPoints.genresDetails}?${ApiRequestKeys.perPageKey}=$perPage&${ApiRequestKeys.pageKey}=$page",
+        manageApiVersion: true,
       ),
     );
     if (page == 1) genresList.clear();
@@ -578,6 +593,7 @@ class CoreServiceApis {
           page: page,
           perPages: perPage,
         ),
+        manageApiVersion: true,
       ),
     );
     if (page == 1) subscriptionPlanList.clear();
