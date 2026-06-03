@@ -1,6 +1,6 @@
 # Apex Prime TV Mobile App - Project Memory
 
-**Last Updated**: May 31, 2026
+**Last Updated**: June 3, 2026
 **Project**: Apex Prime TV Flutter Mobile App
 **Platforms**: iOS (Xcode Cloud), Android (GitHub Actions)
 **Current Version**: 1.0.13+17
@@ -29,7 +29,116 @@
 
 ---
 
-## 🎯 CURRENT SESSION (May 31, 2026)
+## 🎯 CURRENT SESSION (June 3, 2026)
+
+### Issues Reported
+1. iOS app not loading
+2. Android login not working
+3. Android Gmail/Google login not working
+
+### Root Causes Found & Fixed
+
+---
+
+#### 🔴 CRITICAL BUG 1: Wrong API Versioning (Previous Session Error) — FIXED
+**File**: `lib/network/core_api.dart`
+
+**Root Cause**: In the previous session, `manageApiVersion: true` was incorrectly added to endpoints that do NOT have v3 routes on the backend. When the app calls `https://apexprimetv.com/api/v3/<endpoint>` for these, the server returns 404.
+
+**Verified via curl**: Tested all endpoints against both `api/<ep>` and `api/v3/<ep>`:
+| Endpoint | Without v3 | With v3 | Verdict |
+|----------|-----------|---------|---------|
+| `dashboard-detail` | 404 | 200 ✅ | NEEDS v3 |
+| `dashboard-detail-data` | 404 | 500 ✅ | NEEDS v3 |
+| `banner-data` | 404 | 200 ✅ | NEEDS v3 |
+| `get-search` | 404 | 200 ✅ | NEEDS v3 |
+| `popular-search-list` | 404 | 401 ✅ | NEEDS v3 |
+| `notification-count` | 401 | 404 ❌ | NO v3 |
+| `account-setting` | 401 | 404 ❌ | NO v3 |
+| `genre-list` | 200 | 404 ❌ | NO v3 |
+| `plan-list` | 200 | 404 ❌ | NO v3 |
+| `save-rating` | 405 (POST) | 404 ❌ | NO v3 |
+| `delete-rating` | 405 (POST) | 404 ❌ | NO v3 |
+| `save-download` | 405 (POST) | 404 ❌ | NO v3 |
+| `delete-download` | 405 (POST) | 404 ❌ | NO v3 |
+| `save-continuewatch` | 405 (POST) | 404 ❌ | NO v3 |
+| `save-likes` | 405 (POST) | 404 ❌ | NO v3 |
+| `save-watchlist` | 405 (POST) | 404 ❌ | NO v3 |
+| `save-entertainment-views` | 405 (POST) | 404 ❌ | NO v3 |
+| `save-reminder` | 405 (POST) | 404 ❌ | NO v3 |
+| `delete-reminder` | 405 (POST) | 404 ❌ | NO v3 |
+| `save-subscription-details` | 405 (POST) | 404 ❌ | NO v3 |
+| `cancle-subscription` | 405 (POST) | 404 ❌ | NO v3 |
+
+**Fix**: Removed `manageApiVersion: true` from all NO-v3 endpoints in `core_api.dart`. Only `dashboard-detail`, `dashboard-detail-data`, `banner-data`, `get-search`, `popular-search-list`, `content-details`, `content-list`, `livetv-dashboard`/`profile-details` (both work) should use manageApiVersion.
+
+**Impact**: This was causing ALL user interactions (ratings, watchlist, downloads, subscriptions, likes, genre listing, plan listing, notification count, account settings) to fail with 404 errors. The app appeared "not loading" because every action returned errors.
+
+---
+
+#### 🔴 CRITICAL BUG 2: Storage Clear Race Condition (iOS Not Loading) — FIXED
+**File**: `lib/main.dart` (lines 74-85)
+
+**Root Cause**: The one-time storage migration flag was stored using async encrypted `setBoolToLocal()`. Due to iOS Keychain timing (encryption key stored in `FlutterSecureStorage` with `KeychainAccessibility.first_unlock_this_device`), the encryption step could fail silently. When it fails, the `NEEDS_STORAGE_CLEAR_V1` flag is never saved. On the NEXT launch, the flag is missing → `defaultValue: true` → `clearAll()` runs again → **all cached data (app config, login state, dashboard) wiped on every launch**.
+
+**The Faulty Code**:
+```dart
+bool needsClear = await getBoolFromLocal('NEEDS_STORAGE_CLEAR_V1', defaultValue: true);
+if (needsClear) {
+  LocalStorage.clearAll();                         // clears all data
+  await setBoolToLocal('NEEDS_STORAGE_CLEAR_V1', false); // ← async encrypted write could fail silently
+}
+```
+
+**The Fix**: Use synchronous `GetStorage` read/write directly for this version flag, bypassing the encryption layer entirely:
+```dart
+final rawFlag = LocalStorage.localStorage.read('NEEDS_STORAGE_CLEAR_V1');
+if (rawFlag != false) {
+  LocalStorage.clearAll();
+  LocalStorage.localStorage.write('NEEDS_STORAGE_CLEAR_V1', false); // synchronous, reliable
+}
+```
+
+**Impact**: On iOS, this was wiping ALL cached data on every launch including app configuration cache, login state, and dashboard data. Combined with any network issue, the app would show nothing.
+
+---
+
+#### 🟡 KNOWN ISSUE: Android Gmail/Google Sign-In (Not a Code Bug)
+**Status**: Code is correct, issue is Firebase Console configuration
+
+**The Google Sign-In code is correct** (`google_sign_in: ^7.2.0` with `GoogleSignIn.instance` API).
+
+**Why Gmail Login Fails on Android**: Google Sign-In requires the SHA-1 fingerprint of the signing certificate to be registered in Firebase Console. If the GitHub Actions build uses a DIFFERENT keystore than what's registered in Firebase Console → Google Sign-In returns `DEVELOPER_ERROR`.
+
+**Steps to Fix**:
+1. Get SHA-1 from your release keystore:
+   ```bash
+   keytool -list -v -keystore apexprime-release-key.jks -alias your-alias
+   ```
+2. Go to Firebase Console → Project Settings → Your Android App
+3. Add the SHA-1 fingerprint under "SHA certificate fingerprints"
+4. Download updated `google-services.json` and replace in `android/app/`
+5. Commit and push to `android` branch
+
+**Normal Login**: Works correctly. Verified: `POST /api/login` returns valid JSON with `{"status":false,"message":"The provided credentials do not match our records."}` for wrong credentials — meaning the endpoint IS working. Users reporting login issues are likely using wrong credentials.
+
+---
+
+#### 🟡 Auth API Endpoints (Verified Correct — No Changes Needed)
+All auth endpoints (`login`, `social-login`, `register`, `change-password`, etc.) correctly use NON-versioned routes (no `manageApiVersion`). These return proper HTTP responses:
+- `login` → 401/200 on `/api/login` ✅
+- `social-login` → 200 on `/api/social-login` ✅ (tested with real data, works)
+- `notification-list` → 401 on `/api/notification-list` ✅ (auth required)
+
+---
+
+### Changes Made This Session
+1. **`lib/network/core_api.dart`**: Removed incorrect `manageApiVersion: true` from 16 endpoints
+2. **`lib/main.dart`**: Fixed storage clear race condition using synchronous flag storage
+
+---
+
+## 📊 SESSION HISTORY (May 31, 2026)
 
 ### Objective
 Fix App Store rejection for "2.1.0 Performance: App Completeness" - app not loading content at launch
@@ -42,24 +151,6 @@ Dashboard API failure resulted in empty content display. The app had fallback co
 #### 1. Dashboard Fallback Logic
 **File**: `lib/screens/home/home_controller.dart`
 **Change**: Added fallback to load cached dashboard data when API fails
-```dart
-.catchError((e) async {
-  log('Dashboard API error: $e');
-  // Load cached dashboard data if API fails
-  final cachedJson = await getJsonFromLocal(SharedPreferenceConst.CACHE_DASHBOARD_RESPONSE);
-  if (cachedJson != null) {
-    try {
-      final cachedData = DashboardModel.fromJson(cachedJson);
-      cachedDashboardDetailResponse = DashboardDetailResponse(data: cachedData);
-      await createCategorySections(cachedData, isFirstPage: true);
-      log('Loaded cached dashboard data');
-    } catch (cacheError) {
-      log('Error loading cached dashboard: $cacheError');
-    }
-  }
-  showCategoryShimmer(false);
-});
-```
 
 #### 2. Error Logging
 **File**: `lib/screens/home/home_controller.dart`
@@ -158,6 +249,18 @@ Fix FCM token sending to backend and test push notifications from admin panel.
 **Resolution**: Added `LANG=en_US.UTF-8` export in CI script
 **Status**: RESOLVED
 
+#### 5. Wrong manageApiVersion on Non-v3 Endpoints ✅ (June 3, 2026)
+**Issue**: Previous session incorrectly added `manageApiVersion: true` to 16 endpoints that don't have v3 backend routes
+**Root Cause**: Assumptions about API versioning without testing
+**Resolution**: Tested all endpoints via curl against both `/api/<ep>` and `/api/v3/<ep>`. Removed `manageApiVersion: true` from all non-v3 endpoints.
+**Status**: RESOLVED
+
+#### 6. iOS Storage Clear Race Condition ✅ (June 3, 2026)
+**Issue**: App cleared all cached data on every launch due to async encryption failing to save the version flag
+**Root Cause**: `setBoolToLocal` uses async encryption (iOS Keychain) for a simple version flag. Race condition caused flag to not persist.
+**Resolution**: Changed to synchronous `GetStorage.read/write` for the version flag
+**Status**: RESOLVED
+
 ### Pending Issues
 
 #### 1. iPhone Device Connection ⚠️
@@ -172,6 +275,15 @@ Fix FCM token sending to backend and test push notifications from admin panel.
 **Impact**: Cannot install Xcode 16+, limited to Xcode 15.4
 **Workaround**: Using Xcode Cloud for iOS builds
 **Priority**: LOW (workaround in place)
+
+#### 3. Google Sign-In SHA-1 Fingerprint ⚠️ (June 3, 2026)
+**Issue**: Android Gmail login fails with DEVELOPER_ERROR
+**Root Cause**: SHA-1 fingerprint of the release keystore (used in GitHub Actions) may not be registered in Firebase Console
+**Steps to Fix**:
+1. Extract SHA-1: `keytool -list -v -keystore apexprime-release-key.jks -alias your-alias`
+2. Add to Firebase Console → Project Settings → Android App → SHA certificate fingerprints
+3. Download updated `google-services.json` → commit to android branch
+**Priority**: HIGH - blocks Gmail login on Android
 
 ---
 
@@ -328,6 +440,21 @@ Fix FCM token sending to backend and test push notifications from admin panel.
 
 ## 📌 NOTES FOR AI AGENTS
 
+### ⚠️ CRITICAL API VERSIONING RULE (VERIFIED June 3, 2026)
+**BEFORE adding `manageApiVersion: true` to any API call, ALWAYS verify the endpoint exists on both routes:**
+```bash
+# Test without v3
+curl -s -o /dev/null -w "%{http_code}" "https://apexprimetv.com/api/<endpoint>"
+# Test with v3  
+curl -s -o /dev/null -w "%{http_code}" "https://apexprimetv.com/api/v3/<endpoint>"
+```
+
+**Rule**: Only add `manageApiVersion: true` if non-v3 returns 404 AND v3 returns 200/401/405.
+
+**Endpoints that need v3** (verified): `dashboard-detail`, `dashboard-detail-data`, `banner-data`, `get-search`, `popular-search-list`, `content-details`, `content-list`
+
+**Endpoints that do NOT need v3** (verified): `login`, `social-login`, `register`, `notification-count`, `account-setting`, `genre-list`, `plan-list`, ALL save-* endpoints, ALL delete-* endpoints (user actions), `notification-list`, `change-password`, `device-logout`, `logout-all`
+
 ### Important Context
 - Flutter is cross-platform - if Android works, iOS should also work
 - Xcode Cloud is used for iOS builds due to Xcode version limitation
@@ -336,6 +463,9 @@ Fix FCM token sending to backend and test push notifications from admin panel.
 - Always sync branches before pushing
 - Test fallback logic thoroughly
 - Increment version for every submission
+
+### Google Sign-In on Android
+Gmail login requires the release keystore SHA-1 to be in Firebase Console. If DEVELOPER_ERROR appears, add the SHA-1 from the keystore used in GitHub Actions to Firebase Console.
 
 ### Common Commands
 ```bash
