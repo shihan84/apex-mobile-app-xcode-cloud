@@ -927,36 +927,42 @@ Future<void> getAppConfigurations({Function(bool)? loaderOnOff}) async {
   await CoreServiceApis.getPageList().then((value) {
     appPageList.value = value; // data in the observable list
     setIntToLocal(SharedPreferenceConst.PAGE_LAST_CALL_TIME, DateTime.timestamp().millisecondsSinceEpoch);
+  }).catchError((e) {
+    log('getPageList error (non-fatal): $e');
   });
 }
 
 Future<void> getCacheData() async {
-  Map<String, dynamic>? cachedConfigKey = await getJsonFromLocal(SharedPreferenceConst.CACHE_CONFIGURATION_RESPONSE) ?? null;
-  if (cachedConfigKey != null) {
-    appConfigs(ConfigurationResponse.fromJson(cachedConfigKey));
-  }
+  try {
+    Map<String, dynamic>? cachedConfigKey = await getJsonFromLocal(SharedPreferenceConst.CACHE_CONFIGURATION_RESPONSE) ?? null;
+    if (cachedConfigKey != null) {
+      appConfigs(ConfigurationResponse.fromJson(cachedConfigKey));
+    }
 
-  Map<String, dynamic>? cachedUserSubscriptionKey = await getJsonFromLocal(SharedPreferenceConst.CACHE_USER_SUBSCRIPTION_DATA) ?? null;
-  if (cachedUserSubscriptionKey != null) {
-    currentSubscription(SubscriptionPlanModel.fromJson(cachedUserSubscriptionKey));
-  }
-  Map<String, dynamic>? cachedDashboardKey = await getJsonFromLocal(SharedPreferenceConst.CACHE_DASHBOARD_RESPONSE) ?? null;
-  if (cachedDashboardKey != null) {
-    cachedDashboardDetailResponse = DashboardDetailResponse.fromJson(cachedDashboardKey);
-  }
+    Map<String, dynamic>? cachedUserSubscriptionKey = await getJsonFromLocal(SharedPreferenceConst.CACHE_USER_SUBSCRIPTION_DATA) ?? null;
+    if (cachedUserSubscriptionKey != null) {
+      currentSubscription(SubscriptionPlanModel.fromJson(cachedUserSubscriptionKey));
+    }
+    Map<String, dynamic>? cachedDashboardKey = await getJsonFromLocal(SharedPreferenceConst.CACHE_DASHBOARD_RESPONSE) ?? null;
+    if (cachedDashboardKey != null) {
+      cachedDashboardDetailResponse = DashboardDetailResponse.fromJson(cachedDashboardKey);
+    }
 
-  Map<String, dynamic>? cachedLiveTvDashboardKey = await getJsonFromLocal(SharedPreferenceConst.CACHE_LIVE_TV_DASHBOARD_RESPONSE) ?? null;
-  if (cachedLiveTvDashboardKey != null) {
-    cachedLiveTvDashboard = LiveChannelDashboardResponse.fromJson(cachedLiveTvDashboardKey);
-  }
-  Map<String, dynamic>? cachedProfileDetailsKey = await getJsonFromLocal(SharedPreferenceConst.CACHE_PROFILE_DETAIL) ?? null;
-  if (cachedProfileDetailsKey != null) {
-    cachedProfileDetails = ProfileDetailResponse.fromJson(cachedProfileDetailsKey);
-  }
+    Map<String, dynamic>? cachedLiveTvDashboardKey = await getJsonFromLocal(SharedPreferenceConst.CACHE_LIVE_TV_DASHBOARD_RESPONSE) ?? null;
+    if (cachedLiveTvDashboardKey != null) {
+      cachedLiveTvDashboard = LiveChannelDashboardResponse.fromJson(cachedLiveTvDashboardKey);
+    }
+    Map<String, dynamic>? cachedProfileDetailsKey = await getJsonFromLocal(SharedPreferenceConst.CACHE_PROFILE_DETAIL) ?? null;
+    if (cachedProfileDetailsKey != null) {
+      cachedProfileDetails = ProfileDetailResponse.fromJson(cachedProfileDetailsKey);
+    }
 
-  appUnReadNotificationCount(await getIntFromLocal(SharedPreferenceConst.CACHE_UNREAD_NOTIFICATION_COUNT, defaultValue: 0));
-  appUpdateNotify(await getBoolFromLocal(SettingsLocalConst.IS_NOTIFY_UPDATE_ENABLED, defaultValue: false));
-  appDownloadOnWifi(await getBoolFromLocal(SettingsLocalConst.IS_DOWNLOAD_WIFI_ENABLED, defaultValue: false));
-  appSmartDownloadDeleteOn(await getBoolFromLocal(SettingsLocalConst.IS_SMART_DELETE_DOWNLOAD_ENABLED));
-  appParentalLockEnabled(await getBoolFromLocal(SettingsLocalConst.PARENTAL_CONTROL, defaultValue: false));
+    appUnReadNotificationCount(await getIntFromLocal(SharedPreferenceConst.CACHE_UNREAD_NOTIFICATION_COUNT, defaultValue: 0));
+    appUpdateNotify(await getBoolFromLocal(SettingsLocalConst.IS_NOTIFY_UPDATE_ENABLED, defaultValue: false));
+    appDownloadOnWifi(await getBoolFromLocal(SettingsLocalConst.IS_DOWNLOAD_WIFI_ENABLED, defaultValue: false));
+    appSmartDownloadDeleteOn(await getBoolFromLocal(SettingsLocalConst.IS_SMART_DELETE_DOWNLOAD_ENABLED));
+    appParentalLockEnabled(await getBoolFromLocal(SettingsLocalConst.PARENTAL_CONTROL, defaultValue: false));
+  } catch (e) {
+    log('getCacheData error (non-fatal): $e');
+  }
 }

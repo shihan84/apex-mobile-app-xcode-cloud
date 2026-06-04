@@ -109,9 +109,13 @@ class SplashScreenController extends BaseListController<WalkthroughModel> {
           );
         }),
       ],
-    ).catchError((e) {
+    ).catchError((e) async {
       log('Splash init error: $e');
-      throw e;
+      // Navigate to dashboard as fallback — never leave user on blank screen
+      await Future.delayed(
+        const Duration(milliseconds: 300),
+        () => Get.offAll(() => DashboardScreen(), duration: const Duration(milliseconds: 500), curve: Curves.linearToEaseOut),
+      );
     });
   }
 
