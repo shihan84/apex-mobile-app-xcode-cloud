@@ -49,8 +49,11 @@ jobs:
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> key.properties
           echo "storeFile=${{ github.workspace }}/apexprime-release-key.jks" >> key.properties
 
-      - name: Build App Bundle
+      - name: Build App Bundle (AAB)
         run: flutter build appbundle --release
+
+      - name: Build APK (for direct device testing)
+        run: flutter build apk --release
 
       - name: Get version from pubspec
         id: version
@@ -63,4 +66,11 @@ jobs:
         with:
           name: apex-prime-tv-${{ steps.version.outputs.version }}.aab
           path: build/app/outputs/bundle/release/app-release.aab
+          retention-days: 30
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: apex-prime-tv-${{ steps.version.outputs.version }}.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
