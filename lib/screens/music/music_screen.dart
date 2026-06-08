@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_scaffold.dart';
 import 'package:streamit_laravel/utils/colors.dart';
 import 'music_controller.dart';
 import 'components/music_feed.dart';
@@ -39,8 +38,9 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      body: Column(
+    return Scaffold(
+      backgroundColor: appScreenBackgroundDark,
+      body: SafeArea(child: Column(
         children: [
           // Header with search
           Container(
@@ -171,7 +171,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
             ),
           ),
         ],
-      ),
+      )),
     );
   }
 }

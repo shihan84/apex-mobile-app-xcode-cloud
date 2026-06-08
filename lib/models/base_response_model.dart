@@ -11,7 +11,7 @@ class BaseResponseModel {
 
   factory BaseResponseModel.fromJson(Map<String, dynamic> json) {
     return BaseResponseModel(
-      status: json['status'] is bool ? json['status'] : false,
+      status: json['status'] is bool ? json['status'] : (json['success'] is bool ? json['success'] : false),
       message: json['message'] is String ? json['message'] : "",
       data: json['data'],
     );

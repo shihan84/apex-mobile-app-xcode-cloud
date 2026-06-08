@@ -40,14 +40,16 @@ class MusicController extends GetxController {
       );
 
       if (response.status) {
+        final rawData = response.data is Map ? (response.data['data'] ?? []) : (response.data ?? []);
+        final List items = rawData is List ? rawData : [];
         if (refresh) {
-          music.assignAll(response.data.map((item) => Music.fromJson(item)).toList());
+          music.assignAll(items.map((item) => Music.fromJson(item)).toList());
           playlists.clear();
         } else {
-          music.addAll(response.data.map((item) => Music.fromJson(item)).toList());
+          music.addAll(items.map((item) => Music.fromJson(item)).toList());
         }
         
-        hasMore.value = response.data.length >= 20;
+        hasMore.value = items.length >= 20;
         if (hasMore.value) {
           currentPage.value++;
         }
@@ -64,10 +66,12 @@ class MusicController extends GetxController {
 
   Future<void> getPlaylists() async {
     try {
-      final response = await CoreServiceApis.getFeaturedPlaylists();
+      final response = await CoreServiceApis.getPlaylists();
 
       if (response.status) {
-        playlists.assignAll(response.data);
+        final rawData = response.data is Map ? (response.data['data'] ?? []) : (response.data ?? []);
+        final List items = rawData is List ? rawData : [];
+        playlists.assignAll(items.map((item) => Playlist.fromJson(item)).toList());
       } else {
         errorMessage.value = response.message ?? 'Failed to load playlists';
       }
@@ -82,7 +86,8 @@ class MusicController extends GetxController {
       final response = await CoreServiceApis.getFeaturedMusic();
 
       if (response.status) {
-        featuredMusic.assignAll(response.data.map((item) => Music.fromJson(item)).toList());
+        final rawData = response.data is List ? response.data : (response.data is Map ? (response.data['data'] ?? []) : []);
+        featuredMusic.assignAll((rawData as List).map((item) => Music.fromJson(item)).toList());
       } else {
         errorMessage.value = response.message ?? 'Failed to load featured music';
       }
@@ -100,7 +105,8 @@ class MusicController extends GetxController {
       final response = await CoreServiceApis.getTrendingMusic();
 
       if (response.status) {
-        music.assignAll(response.data);
+        final rawData = response.data is Map ? (response.data['data'] ?? []) : (response.data ?? []);
+        music.assignAll((rawData as List).map((item) => Music.fromJson(item)).toList());
       } else {
         errorMessage.value = response.message ?? 'Failed to load trending music';
       }
@@ -124,7 +130,8 @@ class MusicController extends GetxController {
       );
 
       if (response.status) {
-        music.assignAll(response.data.map((item) => Music.fromJson(item)).toList());
+        final rawData = response.data is Map ? (response.data['tracks'] ?? response.data['data'] ?? []) : (response.data ?? []);
+        music.assignAll((rawData as List).map((item) => Music.fromJson(item)).toList());
       } else {
         errorMessage.value = response.message ?? 'Failed to search music';
       }

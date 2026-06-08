@@ -36,22 +36,27 @@ class Playlist {
   });
 
   factory Playlist.fromJson(Map<String, dynamic> json) {
+    bool parseBool(dynamic v) {
+      if (v is bool) return v;
+      if (v is int) return v == 1;
+      return false;
+    }
     return Playlist(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      slug: json['slug'] as String,
+      id: json['id'] is int ? json['id'] : int.tryParse('${json['id']}') ?? 0,
+      name: json['name'] as String? ?? json['title'] as String? ?? '',
+      slug: json['slug'] as String? ?? '',
       description: json['description'] as String?,
-      thumbnailUrl: json['thumbnail_url'] as String?,
-      userId: json['user_id'] as int,
-      isPublic: json['is_public'] as bool? ?? true,
-      isFeatured: json['is_featured'] as bool? ?? false,
-      trackCount: json['track_count'] as int? ?? 0,
-      totalDuration: json['total_duration'] as int? ?? 0,
-      playCount: json['play_count'] as int? ?? 0,
-      status: json['status'] as String? ?? 'active',
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
-      tracks: json['tracks'] != null ? (json['tracks'] as List).map((track) => Music.fromJson(track)).toList() : null,
+      thumbnailUrl: json['cover_art_url'] as String? ?? json['thumbnail_url'] as String?,
+      userId: json['user_id'] is int ? json['user_id'] : int.tryParse('${json['user_id']}') ?? 0,
+      isPublic: parseBool(json['is_public']),
+      isFeatured: parseBool(json['is_featured']),
+      trackCount: json['track_count'] is int ? json['track_count'] : (json['tracks'] is List ? (json['tracks'] as List).length : 0),
+      totalDuration: json['total_duration'] is int ? json['total_duration'] : 0,
+      playCount: json['play_count'] is int ? json['play_count'] : 0,
+      status: json['status'] is bool ? (json['status'] ? 'active' : 'inactive') : (json['status'] as String? ?? 'active'),
+      createdAt: json['created_at'] != null ? DateTime.tryParse(json['created_at']) ?? DateTime.now() : DateTime.now(),
+      updatedAt: json['updated_at'] != null ? DateTime.tryParse(json['updated_at']) ?? DateTime.now() : DateTime.now(),
+      tracks: json['tracks'] is List ? (json['tracks'] as List).map((track) => Music.fromJson(track)).toList() : null,
     );
   }
 
