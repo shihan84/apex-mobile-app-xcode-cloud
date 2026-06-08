@@ -7,6 +7,8 @@ import 'music_controller.dart';
 import 'components/music_feed.dart';
 import 'components/playlist_card.dart';
 import 'services/audio_player_service.dart';
+import 'music_search_screen.dart';
+import 'playlist_detail_screen.dart';
 
 class MusicScreen extends StatefulWidget {
   MusicScreen({super.key});
@@ -23,6 +25,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    musicController.getFeaturedMusic();
     musicController.getMusic();
     musicController.getPlaylists();
   }
@@ -38,6 +41,20 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
     return AppScaffold(
       body: Column(
         children: [
+          // Header with search
+          Container(
+            color: appScreenBackgroundDark,
+            padding: const EdgeInsets.fromLTRB(16, 8, 8, 0),
+            child: Row(
+              children: [
+                const Expanded(child: Text('Music', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold))),
+                IconButton(
+                  icon: const Icon(Icons.search_rounded, color: Colors.white),
+                  onPressed: () => Get.to(() => const MusicSearchScreen()),
+                ),
+              ],
+            ),
+          ),
           // Tab bar
           Container(
             color: appScreenBackgroundDark,
@@ -116,16 +133,11 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                           final playlist = musicController.playlists[index];
                           return PlaylistCard(
                             playlist: playlist,
-                            onTap: () {
-                              if (playlist.tracks != null && playlist.tracks!.isNotEmpty) {
-                                musicController.playMusic(playlist.tracks!.first.id);
-                                AudioPlayerService.to.playTrack(playlist.tracks!.first,
-                                  trackQueue: playlist.tracks!,
-                                  index: 0);
-                              } else {
-                                toast('No tracks in this playlist');
-                              }
-                            },
+                            onTap: () => Get.to(() => PlaylistDetailScreen(
+                              playlistId: playlist.id,
+                              playlistName: playlist.name,
+                              coverUrl: playlist.thumbnailUrl,
+                            )),
                           );
                         },
                       )),

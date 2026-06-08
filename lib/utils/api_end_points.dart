@@ -111,6 +111,11 @@ class APIEndPoints {
   static const String musicDetail = 'music/{id}';
   static const String musicLike = 'music/{id}/like';
   static const String musicPlay = 'music/{id}/play';
+  static const String musicAlbums = 'music/albums';
+  static const String musicAlbumDetail = 'music/albums/{id}';
+  static const String musicPlaylists = 'music/playlists';
+  static const String musicPlaylistDetail = 'music/playlists/{id}';
+  static const String musicGlobalSearch = 'music/search';
   
   static const String playlistsList = 'playlists';
   static const String playlistsFeatured = 'playlists/featured';

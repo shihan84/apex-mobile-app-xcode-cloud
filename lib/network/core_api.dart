@@ -1414,6 +1414,66 @@ class CoreServiceApis {
       return BaseResponseModel(status: false, message: 'Failed to play music');
     }
   }
+
+  static Future<BaseResponseModel> getAlbums({int page = 1, int limit = 20}) async {
+    try {
+      final response = await getApiResponse(
+        getEndPoint(endPoint: APIEndPoints.musicAlbums, params: ['page=$page', 'per_page=$limit']),
+      );
+      return BaseResponseModel.fromJson(response);
+    } catch (e) {
+      log('getAlbums Error: $e');
+      return BaseResponseModel(status: false, message: 'Failed to get albums');
+    }
+  }
+
+  static Future<BaseResponseModel> getAlbumDetail(int albumId) async {
+    try {
+      final response = await getApiResponse(
+        getEndPoint(endPoint: APIEndPoints.musicAlbumDetail.replaceAll('{id}', albumId.toString())),
+      );
+      return BaseResponseModel.fromJson(response);
+    } catch (e) {
+      log('getAlbumDetail Error: $e');
+      return BaseResponseModel(status: false, message: 'Failed to get album');
+    }
+  }
+
+  static Future<BaseResponseModel> getPlaylistDetail(int playlistId) async {
+    try {
+      final response = await getApiResponse(
+        getEndPoint(endPoint: APIEndPoints.musicPlaylistDetail.replaceAll('{id}', playlistId.toString())),
+      );
+      return BaseResponseModel.fromJson(response);
+    } catch (e) {
+      log('getPlaylistDetail Error: $e');
+      return BaseResponseModel(status: false, message: 'Failed to get playlist');
+    }
+  }
+
+  static Future<BaseResponseModel> searchMusicGlobal(String query) async {
+    try {
+      final response = await getApiResponse(
+        getEndPoint(endPoint: APIEndPoints.musicGlobalSearch, params: ['q=${Uri.encodeComponent(query)}']),
+      );
+      return BaseResponseModel.fromJson(response);
+    } catch (e) {
+      log('searchMusicGlobal Error: $e');
+      return BaseResponseModel(status: false, message: 'Failed to search');
+    }
+  }
+
+  static Future<BaseResponseModel> getMusicLyrics(int trackId) async {
+    try {
+      final response = await getApiResponse(
+        getEndPoint(endPoint: 'music/tracks/$trackId/lyrics'),
+      );
+      return BaseResponseModel.fromJson(response);
+    } catch (e) {
+      log('getMusicLyrics Error: $e');
+      return BaseResponseModel(status: false, message: 'Failed to get lyrics');
+    }
+  }
 }
 
 // Helper functions
