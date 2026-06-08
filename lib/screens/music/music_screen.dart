@@ -9,6 +9,7 @@ import 'components/playlist_card.dart';
 import 'services/audio_player_service.dart';
 import 'music_search_screen.dart';
 import 'playlist_detail_screen.dart';
+import 'genre_browse_screen.dart';
 
 class MusicScreen extends StatefulWidget {
   MusicScreen({super.key});
@@ -48,6 +49,10 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
             child: Row(
               children: [
                 const Expanded(child: Text('Music', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold))),
+                IconButton(
+                  icon: const Icon(Icons.category_rounded, color: Colors.white),
+                  onPressed: () => Get.to(() => const GenreBrowseScreen()),
+                ),
                 IconButton(
                   icon: const Icon(Icons.search_rounded, color: Colors.white),
                   onPressed: () => Get.to(() => const MusicSearchScreen()),

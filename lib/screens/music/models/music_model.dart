@@ -69,8 +69,8 @@ class Music {
       artistName: json['artist_name'] as String?,
       albumName: json['album_name'] as String?,
       genre: json['genre'] as String?,
-      thumbnailUrl: json['thumbnail_url'] as String?,
-      audioUrl: json['audio_url'] as String,
+      thumbnailUrl: (json['cover_art_url'] ?? json['thumbnail_url']) as String?,
+      audioUrl: (json['audio_url'] ?? json['file_url'] ?? '') as String,
       duration: json['duration'] as int?,
       fileSize: json['file_size'] as int?,
       bitrate: json['bitrate'] as int?,
@@ -79,19 +79,19 @@ class Music {
       playCount: json['play_count'] as int? ?? 0,
       likeCount: json['like_count'] as int? ?? 0,
       downloadCount: json['download_count'] as int? ?? 0,
-      isExplicit: json['is_explicit'] as bool? ?? false,
-      isPremium: json['is_premium'] as bool? ?? false,
+      isExplicit: _parseBool(json['is_explicit']),
+      isPremium: _parseBool(json['is_premium']),
       planId: json['plan_id'] as int?,
       access: json['access'] as String? ?? 'free',
       releaseDate: json['release_date'] != null ? DateTime.parse(json['release_date']) : null,
       recordLabel: json['record_label'] as String?,
       copyright: json['copyright'] as String?,
-      status: json['status'] as String? ?? 'active',
-      featured: json['featured'] as bool? ?? false,
+      status: json['status'] is bool ? (json['status'] ? 'active' : 'inactive') : (json['status']?.toString() ?? 'active'),
+      featured: _parseBool(json['featured'] ?? json['is_featured']),
       trendingScore: (json['trending_score'] as num?)?.toDouble() ?? 0.0,
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
-      isLiked: json['is_liked'] as bool? ?? false,
+      isLiked: _parseBool(json['is_liked']),
     );
   }
 
@@ -228,4 +228,11 @@ class Music {
   String get displayAlbum {
     return albumName ?? 'Unknown Album';
   }
+}
+
+bool _parseBool(dynamic v) {
+  if (v == null) return false;
+  if (v is bool) return v;
+  if (v is int) return v != 0;
+  return false;
 }

@@ -16,6 +16,7 @@ import '../../components/app_scaffold.dart';
 import '../../main.dart';
 import 'components/category_list_component.dart';
 import 'home_controller.dart';
+import '../music/components/music_home_row.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeController get homeScreenController => Get.find<HomeController>();
@@ -96,6 +97,7 @@ class HomeScreen extends StatelessWidget {
               Obx(
                 () => ShimmerHome().visible(homeScreenController.showCategoryShimmer.value),
               ),
+              const MusicHomeRow(),
             ],
           ),
         ),

@@ -1474,6 +1474,44 @@ class CoreServiceApis {
       return BaseResponseModel(status: false, message: 'Failed to get lyrics');
     }
   }
+
+  static Future<BaseResponseModel> getTracksByArtist(String artistName) async {
+    try {
+      final encoded = Uri.encodeComponent(artistName);
+      final response = await getApiResponse(
+        getEndPoint(endPoint: 'music/artist/$encoded'),
+      );
+      return BaseResponseModel.fromJson(response);
+    } catch (e) {
+      log('getTracksByArtist Error: $e');
+      return BaseResponseModel(status: false, message: 'Failed to get artist tracks');
+    }
+  }
+
+  static Future<BaseResponseModel> getTracksByGenre(String genre) async {
+    try {
+      final encoded = Uri.encodeComponent(genre);
+      final response = await getApiResponse(
+        getEndPoint(endPoint: 'music/genre/$encoded'),
+      );
+      return BaseResponseModel.fromJson(response);
+    } catch (e) {
+      log('getTracksByGenre Error: $e');
+      return BaseResponseModel(status: false, message: 'Failed to get genre tracks');
+    }
+  }
+
+  static Future<BaseResponseModel> getMusicCategories() async {
+    try {
+      final response = await getApiResponse(
+        getEndPoint(endPoint: 'music/categories'),
+      );
+      return BaseResponseModel.fromJson(response);
+    } catch (e) {
+      log('getMusicCategories Error: $e');
+      return BaseResponseModel(status: false, message: 'Failed to get categories');
+    }
+  }
 }
 
 // Helper functions

@@ -6,6 +6,8 @@ import 'package:streamit_laravel/utils/colors.dart';
 import 'package:streamit_laravel/utils/common_base.dart';
 
 import '../models/music_model.dart';
+import '../artist_tracks_screen.dart';
+import '../genre_browse_screen.dart';
 
 class MusicFeed extends StatelessWidget {
   final RxList<Music> music;
@@ -110,11 +112,14 @@ class MusicCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
-                  Text(
-                    track.displayArtist,
-                    style: secondaryTextStyle(size: 14),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  GestureDetector(
+                    onTap: () => Get.to(() => ArtistTracksScreen(artistName: track.displayArtist)),
+                    child: Text(
+                      track.displayArtist,
+                      style: secondaryTextStyle(size: 14),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   if (track.albumName != null)
                     Text(
