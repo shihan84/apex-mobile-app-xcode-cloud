@@ -88,6 +88,7 @@ dependencies:
 
   share_plus: ^12.0.1
   just_audio: ^0.9.40
+  audio_session: ^0.1.21
 
   #  Chrome Cast
   flutter_chrome_cast: ^1.2.7

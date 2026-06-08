@@ -58,6 +58,7 @@ import '../screens/walk_through/walk_through_cotroller.dart';
 import '../screens/watch_list/watch_list_controller.dart';
 import '../screens/shorts/shorts_controller.dart';
 import '../screens/music/music_controller.dart';
+import '../screens/music/services/audio_player_service.dart';
 
 class AppBindings extends Bindings {
   @override
@@ -133,5 +134,6 @@ class AppBindings extends Bindings {
     // Shorts & Music
     Get.lazyPut<ShortsController>(() => ShortsController(), fenix: true);
     Get.lazyPut<MusicController>(() => MusicController(), fenix: true);
+    Get.put<AudioPlayerService>(AudioPlayerService(), permanent: true);
   }
 }

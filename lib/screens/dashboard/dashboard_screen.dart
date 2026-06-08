@@ -16,6 +16,7 @@ import 'package:streamit_laravel/screens/profile/profile_screen.dart';
 import 'package:streamit_laravel/screens/search/search_screen.dart';
 import 'package:streamit_laravel/screens/shorts/shorts_screen.dart';
 import 'package:streamit_laravel/screens/music/music_screen.dart';
+import 'package:streamit_laravel/screens/music/components/mini_player.dart';
 import 'package:streamit_laravel/services/notification_service.dart';
 import 'package:streamit_laravel/utils/common_base.dart';
 
@@ -109,7 +110,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: getCurrentScreen(dashboardController.currentIndex.value),
           ),
         ),
-        bottomNavigationBar: Blur(
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const MiniPlayer(),
+            Blur(
           blur: 20,
           borderRadius: radius(0),
           child: Obx(
@@ -182,6 +187,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
           ),
+          ),
+          ],
         ),
       ),
     );

@@ -4,9 +4,9 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:streamit_laravel/components/app_scaffold.dart';
 import 'package:streamit_laravel/utils/colors.dart';
 import 'music_controller.dart';
-import 'components/music_player.dart';
 import 'components/music_feed.dart';
 import 'components/playlist_card.dart';
+import 'services/audio_player_service.dart';
 
 class MusicScreen extends StatefulWidget {
   MusicScreen({super.key});
@@ -73,11 +73,9 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                             music: musicController.music,
                             onTrackTap: (track) {
                               musicController.playMusic(track.id);
-                              Get.to(() => MusicPlayer(
-                                track: track,
-                                playlist: musicController.music.toList(),
-                                initialIndex: musicController.music.indexOf(track),
-                              ));
+                              AudioPlayerService.to.playTrack(track,
+                                trackQueue: musicController.music.toList(),
+                                index: musicController.music.indexOf(track));
                             },
                             onLike: (track) {
                               musicController.likeMusic(track.id);
@@ -121,11 +119,9 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                             onTap: () {
                               if (playlist.tracks != null && playlist.tracks!.isNotEmpty) {
                                 musicController.playMusic(playlist.tracks!.first.id);
-                                Get.to(() => MusicPlayer(
-                                  track: playlist.tracks!.first,
-                                  playlist: playlist.tracks!,
-                                  initialIndex: 0,
-                                ));
+                                AudioPlayerService.to.playTrack(playlist.tracks!.first,
+                                  trackQueue: playlist.tracks!,
+                                  index: 0);
                               } else {
                                 toast('No tracks in this playlist');
                               }
@@ -146,11 +142,9 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                         music: musicController.featuredMusic,
                         onTrackTap: (track) {
                           musicController.playMusic(track.id);
-                          Get.to(() => MusicPlayer(
-                            track: track,
-                            playlist: musicController.featuredMusic.toList(),
-                            initialIndex: musicController.featuredMusic.indexOf(track),
-                          ));
+                          AudioPlayerService.to.playTrack(track,
+                            trackQueue: musicController.featuredMusic.toList(),
+                            index: musicController.featuredMusic.indexOf(track));
                         },
                         onLike: (track) {
                           musicController.likeMusic(track.id);
