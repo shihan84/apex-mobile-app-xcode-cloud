@@ -224,7 +224,7 @@ class SignInScreen extends StatelessWidget {
         Obx(() => appConfigs.value.isOtpLoginEnabled
             ? AppButton(
                 width: double.infinity,
-                text: locale.value.loginWithPhone ?? 'Login with Phone',
+                text: locale.value.loginWithOtp ?? 'Login with Phone',
                 color: cardColor,
                 textStyle: appButtonTextStyleWhite.copyWith(color: white),
                 shapeBorder: RoundedRectangleBorder(
