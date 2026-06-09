@@ -16,6 +16,7 @@ import '../../main.dart';
 import '../../network/core_api.dart';
 import '../../utils/common_base.dart';
 import '../../utils/common_functions.dart';
+import '../dashboard/dashboard_controller.dart';
 
 class HomeController extends BaseController {
   RxBool showCategoryShimmer = false.obs;
@@ -38,6 +39,9 @@ class HomeController extends BaseController {
     initScrollListener(onNextPage: onNextPage);
     showAppUpdateDialog(Get.context!);
     super.onInit();
+    try {
+      Get.find<DashboardController>().scrollControllers['home'] = scrollController;
+    } catch (_) {}
   }
 
   Future<void> init({

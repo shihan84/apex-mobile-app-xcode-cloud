@@ -81,10 +81,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
       canPop: false, // Always prevent default pop
       onPopInvokedWithResult: (didPop, result) async {
         if (dashboardController.currentBackPressTime == null || DateTime.now().difference(dashboardController.currentBackPressTime!) > const Duration(seconds: 2)) {
-          // First back press → record time
           dashboardController.currentBackPressTime = DateTime.now();
+          toast('Press back again to exit');
         } else {
-          await SystemNavigator.pop(); // closes the app
+          await SystemNavigator.pop();
         }
       },
       child: Scaffold(
@@ -145,7 +145,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     onTap: () async {
                       hideKeyboard(context);
                       floatingController.isExpanded(false);
-                      dashboardController.currentIndex(index);
+                      if (dashboardController.currentIndex.value == index) {
+                        dashboardController.scrollToTop(navBar.type);
+                      } else {
+                        dashboardController.currentIndex(index);
+                      }
                     },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,

@@ -13,17 +13,20 @@ class MusicFeed extends StatelessWidget {
   final RxList<Music> music;
   final Function(Music) onTrackTap;
   final Function(Music) onLike;
+  final ScrollController? scrollController;
 
   const MusicFeed({
     super.key,
     required this.music,
     required this.onTrackTap,
     required this.onLike,
+    this.scrollController,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      controller: scrollController,
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.all(16),
       itemCount: music.length,

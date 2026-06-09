@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:streamit_laravel/utils/colors.dart';
+import 'package:streamit_laravel/screens/dashboard/dashboard_controller.dart';
 import 'music_controller.dart';
 import 'components/music_feed.dart';
 import 'components/playlist_card.dart';
@@ -26,6 +27,7 @@ class MusicScreen extends StatefulWidget {
 class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   MusicController get musicController => Get.find<MusicController>();
+  late final ScrollController _musicScrollCtrl;
 
   static const _recentKey = 'music_recently_played';
   List<Music> _recentlyPlayed = [];
@@ -45,6 +47,8 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
     musicController.getMusic();
     musicController.getPlaylists();
     _loadRecentlyPlayed();
+    final dash = Get.find<DashboardController>();
+    _musicScrollCtrl = dash.scrollFor('music');
   }
 
   Future<void> _loadRecentlyPlayed() async {
@@ -69,6 +73,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
     _tabController.dispose();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +162,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                           )
                         : MusicFeed(
                             music: musicController.music,
+                            scrollController: _musicScrollCtrl,
                             onTrackTap: (track) {
                               _addToRecentlyPlayed(track);
                               musicController.playMusic(track.id);

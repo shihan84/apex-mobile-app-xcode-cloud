@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:streamit_laravel/screens/music/models/music_model.dart';
 import 'package:streamit_laravel/screens/music/music_controller.dart';
 import 'package:streamit_laravel/screens/music/music_player_screen.dart';
 import 'package:streamit_laravel/screens/music/music_screen.dart';
@@ -37,6 +40,7 @@ class MusicHomeRow extends StatelessWidget {
               final t = tracks[i];
               return GestureDetector(
                 onTap: () {
+                  _saveRecentlyPlayed(t);
                   AudioPlayerService.to.playTrack(t, trackQueue: tracks.toList(), index: i);
                   Get.to(() => MusicPlayerScreen(track: t), transition: Transition.downToUp);
                 },
@@ -83,4 +87,18 @@ class MusicHomeRow extends StatelessWidget {
     color: const Color(0xFF2A2A3E),
     child: const Icon(Icons.music_note_rounded, color: Color(0xFF6C63FF), size: 40),
   );
+
+  static Future<void> _saveRecentlyPlayed(Music track) async {
+    const key = 'music_recently_played';
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final raw = prefs.getStringList(key) ?? [];
+      final existing = raw.map((s) {
+        try { return Music.fromJson(jsonDecode(s) as Map<String, dynamic>); }
+        catch (_) { return null; }
+      }).whereType<Music>().toList();
+      final updated = [track, ...existing.where((t) => t.id != track.id)].take(10).toList();
+      await prefs.setStringList(key, updated.map((t) => jsonEncode(t.toJson())).toList());
+    } catch (_) {}
+  }
 }
