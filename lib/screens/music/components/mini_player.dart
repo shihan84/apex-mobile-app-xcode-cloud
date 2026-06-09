@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:marquee/marquee.dart';
 import 'package:streamit_laravel/screens/music/services/audio_player_service.dart';
 import 'package:streamit_laravel/screens/music/music_player_screen.dart';
 
@@ -56,12 +57,21 @@ class MiniPlayer extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(track.title,
-                          style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600),
-                          maxLines: 1, overflow: TextOverflow.ellipsis),
-                        Text(track.displayArtist,
-                          style: const TextStyle(color: Color(0x99FFFFFF), fontSize: 11),
-                          maxLines: 1, overflow: TextOverflow.ellipsis),
+                        SizedBox(
+                          height: 18,
+                          child: _MarqueeText(
+                            text: track.title,
+                            style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        SizedBox(
+                          height: 14,
+                          child: _MarqueeText(
+                            text: track.displayArtist,
+                            style: const TextStyle(color: Color(0x99FFFFFF), fontSize: 11),
+                          ),
+                        ),
                       ],
                     )),
                     IconButton(
@@ -110,4 +120,33 @@ class MiniPlayer extends StatelessWidget {
     ),
     child: const Icon(Icons.music_note_rounded, color: Color(0xFF6C63FF), size: 20),
   );
+}
+
+class _MarqueeText extends StatelessWidget {
+  final String text;
+  final TextStyle style;
+  const _MarqueeText({required this.text, required this.style});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, constraints) {
+      final span = TextSpan(text: text, style: style);
+      final tp = TextPainter(text: span, maxLines: 1, textDirection: TextDirection.ltr);
+      tp.layout(maxWidth: constraints.maxWidth);
+      if (tp.didExceedMaxLines) {
+        return Marquee(
+          text: text,
+          style: style,
+          scrollAxis: Axis.horizontal,
+          blankSpace: 60.0,
+          velocity: 30.0,
+          pauseAfterRound: const Duration(seconds: 2),
+          startAfter: const Duration(seconds: 1),
+          fadingEdgeStartFraction: 0.1,
+          fadingEdgeEndFraction: 0.1,
+        );
+      }
+      return Text(text, style: style, maxLines: 1, overflow: TextOverflow.ellipsis);
+    });
+  }
 }

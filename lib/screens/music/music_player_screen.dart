@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:marquee/marquee.dart';
+import 'package:palette_generator/palette_generator.dart';
 import 'package:streamit_laravel/network/core_api.dart';
 import 'package:streamit_laravel/screens/music/services/audio_player_service.dart';
 import 'models/music_model.dart';
@@ -17,6 +19,9 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> with SingleTicker
   late TabController _tabCtrl;
   String? _lyrics;
   bool _lyricsLoading = false;
+  Color _gradientTop = const Color(0xFF1A1A2E);
+  Color _gradientBottom = const Color(0xFF0F0F1A);
+  String? _lastArtUrl;
 
   @override
   void initState() {
@@ -25,6 +30,28 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> with SingleTicker
     _tabCtrl.addListener(() {
       if (_tabCtrl.index == 1 && _lyrics == null && !_lyricsLoading) _loadLyrics();
     });
+    final svc = AudioPlayerService.to;
+    _extractColors(svc.currentTrack.value?.thumbnailUrl);
+    ever(svc.currentTrack, (track) => _extractColors(track?.thumbnailUrl));
+  }
+
+  Future<void> _extractColors(String? url) async {
+    if (url == null || url.isEmpty || url == _lastArtUrl) return;
+    _lastArtUrl = url;
+    try {
+      final pg = await PaletteGenerator.fromImageProvider(
+        NetworkImage(url),
+        size: const Size(100, 100),
+        maximumColorCount: 8,
+      );
+      final dominant = pg.dominantColor?.color ?? const Color(0xFF1A1A2E);
+      if (mounted) {
+        setState(() {
+          _gradientTop = dominant.withAlpha(220);
+          _gradientBottom = Color.lerp(dominant, Colors.black, 0.85)!.withAlpha(255);
+        });
+      }
+    } catch (_) {}
   }
 
   Future<void> _loadLyrics() async {
@@ -45,7 +72,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> with SingleTicker
   Widget build(BuildContext context) {
     final svc = AudioPlayerService.to;
     return Scaffold(
-      backgroundColor: const Color(0xFF0F0F1A),
+      backgroundColor: _gradientBottom,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -68,10 +95,21 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> with SingleTicker
           tabs: const [Tab(text: "Player"), Tab(text: "Lyrics")],
         ),
       ),
-      body: TabBarView(controller: _tabCtrl, children: [
-        _buildPlayer(svc),
-        _buildLyrics(),
-      ]),
+      body: AnimatedContainer(
+        duration: const Duration(milliseconds: 600),
+        curve: Curves.easeInOut,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [_gradientTop, _gradientBottom],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: TabBarView(controller: _tabCtrl, children: [
+          _buildPlayer(svc),
+          _buildLyrics(),
+        ]),
+      ),
     );
   }
 
@@ -102,9 +140,21 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> with SingleTicker
           const SizedBox(height: 24),
           Row(children: [
             Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(current.title, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold), maxLines: 1, overflow: TextOverflow.ellipsis),
+              SizedBox(
+                height: 28,
+                child: _MarqueeOrText(
+                  text: current.title,
+                  style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+              ),
               const SizedBox(height: 4),
-              Text(current.displayArtist, style: const TextStyle(color: Color(0x996C63FF), fontSize: 15)),
+              SizedBox(
+                height: 20,
+                child: _MarqueeOrText(
+                  text: current.displayArtist,
+                  style: const TextStyle(color: Color(0x996C63FF), fontSize: 15),
+                ),
+              ),
             ])),
             IconButton(
               icon: Icon(current.isLiked ? Icons.favorite_rounded : Icons.favorite_border_rounded,
@@ -186,4 +236,33 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> with SingleTicker
     decoration: const BoxDecoration(gradient: LinearGradient(colors: [Color(0xFF2A2A3E), Color(0xFF1A1A2E)])),
     child: const Center(child: Icon(Icons.music_note_rounded, color: Color(0xFF6C63FF), size: 80)),
   );
+}
+
+class _MarqueeOrText extends StatelessWidget {
+  final String text;
+  final TextStyle style;
+  const _MarqueeOrText({required this.text, required this.style});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, constraints) {
+      final span = TextSpan(text: text, style: style);
+      final tp = TextPainter(text: span, maxLines: 1, textDirection: TextDirection.ltr);
+      tp.layout(maxWidth: constraints.maxWidth);
+      if (tp.didExceedMaxLines) {
+        return Marquee(
+          text: text,
+          style: style,
+          scrollAxis: Axis.horizontal,
+          blankSpace: 80.0,
+          velocity: 35.0,
+          pauseAfterRound: const Duration(seconds: 2),
+          startAfter: const Duration(seconds: 1),
+          fadingEdgeStartFraction: 0.08,
+          fadingEdgeEndFraction: 0.08,
+        );
+      }
+      return Text(text, style: style, maxLines: 1);
+    });
+  }
 }
