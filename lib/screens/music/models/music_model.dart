@@ -1,7 +1,7 @@
 class Music {
   final int id;
   final String title;
-  final String slug;
+  final String? slug;
   final String? artistName;
   final String? albumName;
   final String? genre;
@@ -25,14 +25,14 @@ class Music {
   final String status;
   final bool featured;
   final double trendingScore;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
   final bool isLiked;
 
   Music({
     required this.id,
     required this.title,
-    required this.slug,
+    this.slug,
     this.artistName,
     this.albumName,
     this.genre,
@@ -56,8 +56,8 @@ class Music {
     this.status = 'active',
     this.featured = false,
     this.trendingScore = 0.0,
-    required this.createdAt,
-    required this.updatedAt,
+    this.createdAt,
+    this.updatedAt,
     this.isLiked = false,
   });
 
@@ -65,12 +65,12 @@ class Music {
     return Music(
       id: json['id'] as int,
       title: json['title'] as String,
-      slug: json['slug'] as String,
+      slug: json['slug'] as String?,
+      audioUrl: (json['audio_url'] ?? json['file_url'] ?? '') as String,
       artistName: json['artist_name'] as String?,
       albumName: json['album_name'] as String?,
       genre: json['genre'] as String?,
       thumbnailUrl: (json['cover_art_url'] ?? json['thumbnail_url']) as String?,
-      audioUrl: (json['audio_url'] ?? json['file_url'] ?? '') as String,
       duration: json['duration'] as int?,
       fileSize: json['file_size'] as int?,
       bitrate: json['bitrate'] as int?,
@@ -89,8 +89,8 @@ class Music {
       status: json['status'] is bool ? (json['status'] ? 'active' : 'inactive') : (json['status']?.toString() ?? 'active'),
       featured: _parseBool(json['featured'] ?? json['is_featured']),
       trendingScore: (json['trending_score'] as num?)?.toDouble() ?? 0.0,
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      createdAt: json['created_at'] != null ? DateTime.tryParse(json['created_at']) : null,
+      updatedAt: json['updated_at'] != null ? DateTime.tryParse(json['updated_at']) : null,
       isLiked: _parseBool(json['is_liked']),
     );
   }
@@ -187,8 +187,8 @@ class Music {
       'status': status,
       'featured': featured,
       'trending_score': trendingScore,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
+      'created_at': createdAt?.toIso8601String(),
+      'updated_at': updatedAt?.toIso8601String(),
       'is_liked': isLiked,
     };
   }
