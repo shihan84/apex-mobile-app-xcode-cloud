@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:streamit_laravel/network/core_api.dart';
+import 'package:streamit_laravel/screens/music/music_controller.dart';
 import 'package:streamit_laravel/screens/music/services/audio_player_service.dart';
 import 'models/music_model.dart';
 
@@ -63,6 +64,19 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> with SingleTicker
       _lyrics = res.status ? (res.data?['lyrics'] as String? ?? track.lyrics ?? 'No lyrics available') : (track.lyrics ?? 'No lyrics available');
       _lyricsLoading = false;
     });
+  }
+
+  Future<void> _toggleLike(AudioPlayerService svc) async {
+    final track = svc.currentTrack.value ?? widget.track;
+    final wasLiked = track.isLiked;
+    // Optimistic update
+    svc.currentTrack.value = track.copyWith(isLiked: !wasLiked);
+    try {
+      Get.find<MusicController>().likeMusic(track.id);
+    } catch (_) {
+      // Revert on error
+      svc.currentTrack.value = track.copyWith(isLiked: wasLiked);
+    }
   }
 
   @override
@@ -156,11 +170,17 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> with SingleTicker
                 ),
               ),
             ])),
-            IconButton(
-              icon: Icon(current.isLiked ? Icons.favorite_rounded : Icons.favorite_border_rounded,
-                  color: current.isLiked ? const Color(0xFF6C63FF) : Colors.white, size: 26),
-              onPressed: () {},
-            ),
+            Obx(() {
+              final liked = svc.currentTrack.value?.isLiked ?? current.isLiked;
+              return IconButton(
+                icon: Icon(
+                  liked ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+                  color: liked ? const Color(0xFF6C63FF) : Colors.white,
+                  size: 26,
+                ),
+                onPressed: () => _toggleLike(svc),
+              );
+            }),
           ]),
           const SizedBox(height: 20),
           Obx(() => Column(children: [

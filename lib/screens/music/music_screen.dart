@@ -12,6 +12,7 @@ import 'services/audio_player_service.dart';
 import 'music_player_screen.dart';
 import 'music_search_screen.dart';
 import 'playlist_detail_screen.dart';
+import 'artist_tracks_screen.dart';
 import 'genre_browse_screen.dart';
 import 'models/music_model.dart';
 
@@ -109,6 +110,20 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
           ),
           // Recently played row
           if (_recentlyPlayed.isNotEmpty) _buildRecentlyPlayedRow(),
+          // Artists row
+          Obx(() {
+            if (musicController.music.isEmpty) return const SizedBox.shrink();
+            final seen = <String>{};
+            final artists = <Map<String, String>>[];
+            for (final t in musicController.music) {
+              final a = t.artistName ?? '';
+              if (a.isNotEmpty && seen.add(a)) {
+                artists.add({'name': a, 'img': t.thumbnailUrl ?? ''});
+              }
+            }
+            if (artists.isEmpty) return const SizedBox.shrink();
+            return _buildArtistRow(artists);
+          }),
           // Tab bar
           Container(
             color: appScreenBackgroundDark,
@@ -305,5 +320,77 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
       borderRadius: BorderRadius.circular(10),
     ),
     child: const Icon(Icons.music_note_rounded, color: Color(0xFF6C63FF), size: 28),
+  );
+
+  Widget _buildArtistRow(List<Map<String, String>> artists) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 12, 16, 8),
+          child: Text(
+            'Artists',
+            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ),
+        SizedBox(
+          height: 100,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            itemCount: artists.length,
+            itemBuilder: (context, i) {
+              final artist = artists[i];
+              final name = artist['name']!;
+              final img = artist['img']!;
+              return GestureDetector(
+                onTap: () => Get.to(
+                  () => ArtistTracksScreen(artistName: name),
+                  transition: Transition.rightToLeft,
+                ),
+                child: Container(
+                  width: 72,
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 64, height: 64,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: const Color(0x556C63FF), width: 2),
+                        ),
+                        child: ClipOval(
+                          child: img.isNotEmpty
+                              ? CachedNetworkImage(
+                                  imageUrl: img,
+                                  width: 64, height: 64, fit: BoxFit.cover,
+                                  errorWidget: (_, __, ___) => _artistPlaceholder(),
+                                )
+                              : _artistPlaceholder(),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        name,
+                        style: const TextStyle(color: Colors.white70, fontSize: 10),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _artistPlaceholder() => Container(
+    width: 64, height: 64,
+    color: const Color(0x4D6C63FF),
+    child: const Icon(Icons.person_rounded, color: Color(0xFF6C63FF), size: 32),
   );
 }
