@@ -15,7 +15,6 @@ import 'package:streamit_laravel/utils/extension/string_extension.dart';
 
 import '../../../utils/common_base.dart';
 import '../forgot_password/forgot_password_screen.dart';
-import '../phone_login_screen.dart';
 import '../sign_in/sign_in_controller.dart';
 import '../sign_up/signup_screen.dart';
 import 'component/social_auth.dart';
@@ -219,24 +218,6 @@ class SignInScreen extends StatelessWidget {
             },
           ),
         ),
-        16.height,
-        // Phone Login Button - shown when OTP login is enabled in backend
-        Obx(() => appConfigs.value.isOtpLoginEnabled
-            ? AppButton(
-                width: double.infinity,
-                text: locale.value.loginWithOtp ?? 'Login with Phone',
-                color: cardColor,
-                textStyle: appButtonTextStyleWhite.copyWith(color: white),
-                shapeBorder: RoundedRectangleBorder(
-                  borderRadius: radius(defaultAppButtonRadius / 2),
-                  side: BorderSide(color: borderColor),
-                ),
-                onTap: () {
-                  Get.to(() => PhoneLoginScreen());
-                },
-              )
-            : const Offstage()),
-        Obx(() => appConfigs.value.isOtpLoginEnabled ? 16.height : 0.height),
       ],
     );
   }

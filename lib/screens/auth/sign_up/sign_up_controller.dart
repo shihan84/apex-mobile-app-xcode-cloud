@@ -7,7 +7,6 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:streamit_laravel/controllers/base_controller.dart';
 import 'package:streamit_laravel/main.dart';
 import 'package:streamit_laravel/network/auth_apis.dart';
-import 'package:streamit_laravel/screens/auth/sign_in/sign_in_controller.dart';
 import 'package:streamit_laravel/services/notification_service.dart';
 import 'package:streamit_laravel/utils/api_end_points.dart';
 import 'package:streamit_laravel/utils/common_functions.dart';
@@ -38,29 +37,12 @@ class SignUpController extends BaseController {
   FocusNode dobFocus = FocusNode();
 
   Rx<Country> selectedCountry = defaultCountry.obs;
-  RxBool isPhoneAuth = false.obs;
   RxBool isBtnEnable = false.obs;
   RxString countryCode = defaultCountry.phoneCode.obs;
 
   @override
   void onInit() {
     initScrollListener();
-    if (Get.arguments != null) {
-      if (Get.arguments[0] is bool) {
-        isPhoneAuth.value = true;
-      }
-      if (Get.arguments[1] is String) {
-        mobileCont.text = Get.arguments[1];
-        passwordCont.text = Get.arguments[1];
-        confPasswordCont.text = Get.arguments[1];
-      }
-      if (Get.arguments[2] is String) {
-        countryCode.value = Get.arguments[2];
-
-        String newArgument = (Get.arguments[1] as String).replaceFirst('+', '').replaceFirst(Get.arguments[2], '');
-        mobileCont.text = newArgument;
-      }
-    }
     super.onInit();
   }
 
@@ -82,40 +64,31 @@ class SignUpController extends BaseController {
       ApiRequestKeys.platformKey: currentDevice.value.platform,
     };
 
-    if (isPhoneAuth.value) req.putIfAbsent(ApiRequestKeys.loginType, () => LoginTypeConst.loginTypeOTP);
-
     await AuthServiceApis.createUser(request: req).then((value) async {
-      if (isPhoneAuth.value) {
-        final SignInController verificationController = Get.find<SignInController>();
-        verificationController.phoneCont.text = (mobileCont.text);
-        verificationController.countryCode(countryCode.value);
-        verificationController.phoneSignIn();
-      } else {
-        try {
-          final Map<String, dynamic> req = {
-            ApiRequestKeys.email: emailCont.text.trim(),
-            ApiRequestKeys.password: passwordCont.text.trim(),
-            ApiRequestKeys.deviceIdKey: currentDevice.value.deviceId,
-            ApiRequestKeys.deviceNameKey: currentDevice.value.deviceName,
-            ApiRequestKeys.platformKey: currentDevice.value.platform,
-            ApiRequestKeys.loginType: LoginTypeConst.loginTypeEmail,
-          };
-          await AuthServiceApis.loginUser(request: req).then((value) async {
-            NotificationService().subscribeTopic();
-            Get.back(result: true);
-            successSnackBar(locale.value.welcomeUserMessage(APP_NAME, loginUserData.value.fullName));
-          }).whenComplete(() {
-            setLoading(false);
-          }).catchError((e) {
-            setLoading(false);
-            errorSnackBar(error: e);
-            Get.off(() => SignInScreen());
-          });
-        } catch (e) {
-          log('E: $e');
-          toast(e.toString(), print: true);
+      try {
+        final Map<String, dynamic> loginReq = {
+          ApiRequestKeys.email: emailCont.text.trim(),
+          ApiRequestKeys.password: passwordCont.text.trim(),
+          ApiRequestKeys.deviceIdKey: currentDevice.value.deviceId,
+          ApiRequestKeys.deviceNameKey: currentDevice.value.deviceName,
+          ApiRequestKeys.platformKey: currentDevice.value.platform,
+          ApiRequestKeys.loginType: LoginTypeConst.loginTypeEmail,
+        };
+        await AuthServiceApis.loginUser(request: loginReq).then((value) async {
+          NotificationService().subscribeTopic();
+          Get.back(result: true);
+          successSnackBar(locale.value.welcomeUserMessage(APP_NAME, loginUserData.value.fullName));
+        }).whenComplete(() {
           setLoading(false);
-        }
+        }).catchError((e) {
+          setLoading(false);
+          errorSnackBar(error: e);
+          Get.off(() => SignInScreen());
+        });
+      } catch (e) {
+        log('E: $e');
+        toast(e.toString(), print: true);
+        setLoading(false);
       }
     }).catchError((e) {
       errorSnackBar(error: e);

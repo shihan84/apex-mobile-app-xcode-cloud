@@ -169,8 +169,7 @@ class SignUpScreen extends StatelessWidget {
                     signUpController.onBtnEnable();
                   },
                 ),
-                if (!signUpController.isPhoneAuth.value) ...[
-                  AppTextField(
+                AppTextField(
                     textStyle: commonPrimaryTextStyle(color: white),
                     controller: signUpController.passwordCont,
                     focus: signUpController.passwordFocus,
@@ -228,7 +227,6 @@ class SignUpScreen extends StatelessWidget {
                       signUpController.onBtnEnable();
                     },
                   ),
-                ],
                 16.height,
                 AppButton(
                   width: double.infinity,
