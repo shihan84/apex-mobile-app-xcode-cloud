@@ -42,12 +42,27 @@ class EncryptionService {
   ///
   /// Throws: Exception if secure storage is unavailable
   static Future<void> initialize() async {
-    String? base64Key = await _secureStorage.read(key: _keyName);
+    String? base64Key;
+
+    try {
+      base64Key = await _secureStorage.read(key: _keyName);
+    } catch (_) {
+      // Keystore is corrupted (e.g. after reinstall or Android keystore reset).
+      // Wipe all secure storage and regenerate a fresh key.
+      try {
+        await _secureStorage.deleteAll();
+      } catch (_) {}
+      base64Key = null;
+    }
 
     // Generate and store a new key if one doesn't exist
     if (base64Key == null) {
       base64Key = _generateKeyBase64();
-      await _secureStorage.write(key: _keyName, value: base64Key);
+      try {
+        await _secureStorage.write(key: _keyName, value: base64Key);
+      } catch (_) {
+        // If write also fails, continue with in-memory key only
+      }
     }
 
     final key = enc.Key.fromBase64(base64Key);
