@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:streamit_laravel/components/app_dialog_widget.dart';
 import 'package:streamit_laravel/controllers/base_controller.dart';
 import 'package:streamit_laravel/network/auth_apis.dart';
 import 'package:streamit_laravel/screens/profile/watching_profile/watching_profile_screen.dart';
