@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:audio_service/audio_service.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
@@ -39,7 +38,6 @@ class AudioPlayerService extends GetxService {
       isLoading.value = state.processingState == ProcessingState.loading ||
           state.processingState == ProcessingState.buffering;
       if (state.processingState == ProcessingState.completed) _onCompleted();
-      _updateMediaNotification();
     });
     _player.positionStream.listen((p) => position.value = p);
     _player.durationStream.listen((d) => duration.value = d ?? Duration.zero);
@@ -51,22 +49,6 @@ class AudioPlayerService extends GetxService {
     } else if (repeatMode.value == AudioRepeatMode.all || currentIndex.value < queue.length - 1) {
       playNext();
     }
-  }
-
-  void _updateMediaNotification() {
-    final track = currentTrack.value;
-    if (track == null) return;
-    
-    final item = MediaItem(
-      id: track.id.toString(),
-      title: track.title,
-      artist: track.displayArtist,
-      album: track.albumName,
-      artUri: track.thumbnailUrl?.isNotEmpty == true ? Uri.parse(track.thumbnailUrl!) : null,
-      duration: duration.value.inMilliseconds > 0 ? duration.value : null,
-    );
-    
-    AudioService.updateMediaItem(item);
   }
 
   Future<void> playTrack(Music track, {List<Music>? trackQueue, int? index}) async {
@@ -170,53 +152,4 @@ class AudioPlayerService extends GetxService {
 
   @override
   void onClose() { _player.dispose(); super.onClose(); }
-}
-
-// Simple handler for background audio
-class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
-  final _player = AudioPlayer();
-
-  AudioPlayerHandler() {
-    _init();
-  }
-
-  Future<void> _init() async {
-    _player.playbackEventStream.listen((_) => _broadcastState());
-  }
-
-  void _broadcastState() {
-    playbackState.add(PlaybackState(
-      controls: [
-        MediaControl.skipToPrevious,
-        if (_player.playing) MediaControl.pause else MediaControl.play,
-        MediaControl.stop,
-        MediaControl.skipToNext,
-      ],
-      systemActions: const {MediaAction.seek},
-      androidCompactActionIndices: const [0, 1, 3],
-      processingState: _mapState(_player.processingState),
-      playing: _player.playing,
-      updatePosition: _player.position,
-      bufferedPosition: _player.bufferedPosition,
-    ));
-  }
-
-  AudioProcessingState _mapState(ProcessingState state) {
-    switch (state) {
-      case ProcessingState.idle: return AudioProcessingState.idle;
-      case ProcessingState.loading: return AudioProcessingState.loading;
-      case ProcessingState.buffering: return AudioProcessingState.buffering;
-      case ProcessingState.ready: return AudioProcessingState.ready;
-      case ProcessingState.completed: return AudioProcessingState.completed;
-      default: return AudioProcessingState.idle;
-    }
-  }
-
-  @override Future<void> play() => _player.play();
-  @override Future<void> pause() => _player.pause();
-  @override Future<void> stop() async {
-    await _player.stop();
-    await super.stop();
-  }
-  @override Future<void> seek(Duration position) => _player.seek(position);
 }

@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:ui';
 
-import 'package:audio_service/audio_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -29,7 +27,6 @@ import 'package:streamit_laravel/utils/page_transition_builder.dart';
 import 'app_theme.dart';
 import 'bindings/app_bindings.dart';
 import 'configs.dart';
-import 'screens/music/services/audio_player_service.dart';
 import 'locale/app_localizations.dart';
 import 'locale/languages.dart';
 import 'screens/content/model/content_model.dart';
@@ -60,19 +57,6 @@ const platform = MethodChannel('flutter.iqonic.streamitlaravel.com.channel');
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MediaKit.ensureInitialized();
-  
-  // Initialize background audio service
-  await AudioService.init(
-    builder: () => AudioPlayerHandler(),
-    config: const AudioServiceConfig(
-      androidNotificationChannelId: 'com.apexprime.music',
-      androidNotificationChannelName: 'Music Playback',
-      androidNotificationChannelDescription: 'Shows music player controls',
-      notificationColor: Color(0xFF6C63FF),
-      androidNotificationIcon: 'mipmap/ic_launcher',
-      androidShowNotificationBadge: true,
-    ),
-  );
   
   setupGlobalFontConfig();
 
