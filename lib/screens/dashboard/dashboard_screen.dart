@@ -113,7 +113,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         bottomNavigationBar: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const MiniPlayer(),
+            const DismissibleMiniPlayer(),
             Blur(
           blur: 20,
           borderRadius: radius(0),

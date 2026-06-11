@@ -5,6 +5,34 @@ import 'package:marquee/marquee.dart';
 import 'package:streamit_laravel/screens/music/services/audio_player_service.dart';
 import 'package:streamit_laravel/screens/music/music_player_screen.dart';
 
+/// Wrapper with swipe-to-dismiss functionality
+class DismissibleMiniPlayer extends StatelessWidget {
+  const DismissibleMiniPlayer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      final svc = AudioPlayerService.to;
+      if (svc.currentTrack.value == null) return const SizedBox.shrink();
+      
+      return Dismissible(
+        key: const ValueKey('mini_player'),
+        direction: DismissDirection.down,
+        onDismissed: (_) => svc.stop(),
+        background: Container(
+          decoration: BoxDecoration(
+            color: Colors.red.withAlpha(77),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          alignment: Alignment.center,
+          child: const Icon(Icons.close, color: Colors.red),
+        ),
+        child: const MiniPlayer(),
+      );
+    });
+  }
+}
+
 class MiniPlayer extends StatelessWidget {
   const MiniPlayer({super.key});
 
@@ -99,6 +127,13 @@ class MiniPlayer extends StatelessWidget {
                     IconButton(
                       onPressed: () => svc.playNext(),
                       icon: const Icon(Icons.skip_next_rounded, color: Colors.white, size: 22),
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                    ),
+                    const SizedBox(width: 2),
+                    IconButton(
+                      onPressed: () => svc.stop(),
+                      icon: const Icon(Icons.close_rounded, color: Colors.white70, size: 18),
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
                     ),
