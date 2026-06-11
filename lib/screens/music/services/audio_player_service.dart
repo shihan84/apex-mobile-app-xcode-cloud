@@ -67,7 +67,6 @@ class AudioPlayerService extends GetxService {
     );
     
     AudioService.updateMediaItem(item);
-    AudioService.updatePosition(position.value);
   }
 
   Future<void> playTrack(Music track, {List<Music>? trackQueue, int? index}) async {
@@ -93,7 +92,6 @@ class AudioPlayerService extends GetxService {
     currentTrack.value = track;
     isLoading.value = true;
     try {
-      await AudioService.start(backgroundTaskEntrypoint: _backgroundTask);
       await _player.setUrl(track.audioUrl);
       await _player.play();
       CoreServiceApis.playMusic(track.id);
@@ -163,17 +161,11 @@ class AudioPlayerService extends GetxService {
 
   Future<void> stop() async {
     await _player.stop();
-    await AudioService.stop();
     currentTrack.value = null;
     queue.clear();
     _originalQueue.clear();
     position.value = Duration.zero;
     duration.value = Duration.zero;
-  }
-
-  static void _backgroundTask() {
-    // Background audio service entry point
-    AudioServiceBackground.run(() => AudioPlayerHandler());
   }
 
   @override
@@ -209,13 +201,14 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
     ));
   }
 
-  AudioProcessingState _mapState(just_audio.ProcessingState state) {
+  AudioProcessingState _mapState(ProcessingState state) {
     switch (state) {
-      case just_audio.ProcessingState.idle: return AudioProcessingState.idle;
-      case just_audio.ProcessingState.loading: return AudioProcessingState.loading;
-      case just_audio.ProcessingState.buffering: return AudioProcessingState.buffering;
-      case just_audio.ProcessingState.ready: return AudioProcessingState.ready;
-      case just_audio.ProcessingState.completed: return AudioProcessingState.completed;
+      case ProcessingState.idle: return AudioProcessingState.idle;
+      case ProcessingState.loading: return AudioProcessingState.loading;
+      case ProcessingState.buffering: return AudioProcessingState.buffering;
+      case ProcessingState.ready: return AudioProcessingState.ready;
+      case ProcessingState.completed: return AudioProcessingState.completed;
+      default: return AudioProcessingState.idle;
     }
   }
 

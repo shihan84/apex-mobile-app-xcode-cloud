@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -67,7 +68,7 @@ Future<void> main() async {
       androidNotificationChannelId: 'com.apexprime.music',
       androidNotificationChannelName: 'Music Playback',
       androidNotificationChannelDescription: 'Shows music player controls',
-      notificationColor: 0xFF6C63FF,
+      notificationColor: Color(0xFF6C63FF),
       androidNotificationIcon: 'mipmap/ic_launcher',
       androidShowNotificationBadge: true,
     ),
