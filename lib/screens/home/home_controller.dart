@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/ads/ads_helper.dart';
-import 'package:streamit_laravel/controllers/base_controller.dart';
-import 'package:streamit_laravel/screens/content/model/content_model.dart';
-import 'package:streamit_laravel/screens/home/model/dashboard_res_model.dart';
-import 'package:streamit_laravel/screens/slider/slider_controller.dart';
-import 'package:streamit_laravel/screens/watch_list/model/watch_list_resp.dart';
-import 'package:streamit_laravel/services/local_storage_service.dart';
-import 'package:streamit_laravel/utils/constants.dart';
+import 'package:apexprime_tv/ads/ads_helper.dart';
+import 'package:apexprime_tv/controllers/base_controller.dart';
+import 'package:apexprime_tv/screens/content/model/content_model.dart';
+import 'package:apexprime_tv/screens/home/model/dashboard_res_model.dart';
+import 'package:apexprime_tv/screens/slider/slider_controller.dart';
+import 'package:apexprime_tv/screens/watch_list/model/watch_list_resp.dart';
+import 'package:apexprime_tv/services/local_storage_service.dart';
+import 'package:apexprime_tv/utils/constants.dart';
 
 import '../../main.dart';
 import '../../network/core_api.dart';
@@ -143,6 +143,7 @@ class HomeController extends BaseController {
             cachedDashboardDetailResponse!.data.continueWatch = oldData.data.continueWatch;
             cachedDashboardDetailResponse!.data.top10List = oldData.data.top10List;
             cachedDashboardDetailResponse!.data.latestList = oldData.data.latestList;
+            cachedDashboardDetailResponse!.data.topChannelList = oldData.data.topChannelList;
             cachedDashboardDetailResponse!.data.likeMovieList = oldData.data.likeMovieList;
             cachedDashboardDetailResponse!.data.viewedMovieList = oldData.data.viewedMovieList;
             cachedDashboardDetailResponse!.data.basedOnLastWatchMovieList = oldData.data.basedOnLastWatchMovieList;
@@ -327,9 +328,7 @@ class HomeController extends BaseController {
         index: 6,
       );
     }
-  }
 
-  Future<void> createDashboardOtherSectionList(DashboardModel dashboard) async {
     // 📺 Live TV Channels
     if (appConfigs.value.enableLiveTv) {
       addOrReplaceSection(
@@ -343,7 +342,9 @@ class HomeController extends BaseController {
         index: 7,
       );
     }
+  }
 
+  Future<void> createDashboardOtherSectionList(DashboardModel dashboard) async {
     // 📺 Popular TV Shows
     if (appConfigs.value.enableTvShow) {
       addOrReplaceSection(
