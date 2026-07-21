@@ -11,7 +11,7 @@ import io.flutter.plugin.common.MethodChannel
 
 //FlPiPActivity()
 class MainActivity: FlutterFragmentActivity() {
-    private val CHANNEL: String = "flutter.iqonic.streamitlaravel.com.channel"
+    private val CHANNEL: String = "flutter.varchaswaa.apexprimetv.com.channel"
     private lateinit var channel: MethodChannel
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {

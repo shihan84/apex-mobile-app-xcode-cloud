@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/generated/assets.dart';
-import 'package:streamit_laravel/screens/dashboard/dashboard_controller.dart';
-import 'package:streamit_laravel/screens/setting/help_and_support/help_and_support_controller.dart';
-import 'package:streamit_laravel/services/local_storage_service.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
+import 'package:apexprime_tv/generated/assets.dart';
+import 'package:apexprime_tv/screens/dashboard/dashboard_controller.dart';
+import 'package:apexprime_tv/screens/setting/help_and_support/help_and_support_controller.dart';
+import 'package:apexprime_tv/services/local_storage_service.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
 
 import '../../../components/app_scaffold.dart';
 import '../../../locale/app_localizations.dart';

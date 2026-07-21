@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:streamit_laravel/screens/downloads/models/hive_content_model.dart';
+import 'package:apexprime_tv/screens/downloads/models/hive_content_model.dart';
 
 import 'download_service.dart';
 

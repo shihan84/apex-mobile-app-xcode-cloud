@@ -2,9 +2,9 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_no_data_widget.dart';
-import 'package:streamit_laravel/generated/assets.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
+import 'package:apexprime_tv/components/app_no_data_widget.dart';
+import 'package:apexprime_tv/generated/assets.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
 
 import '../../main.dart';
 import '../colors.dart';

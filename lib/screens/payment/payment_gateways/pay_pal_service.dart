@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_paypal_checkout/flutter_paypal_checkout.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/configs.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
+import 'package:apexprime_tv/configs.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
 
 import '../../../main.dart';
 
@@ -19,7 +19,7 @@ class PayPalService {
   }) async {
     loderOnOFF(true);
     PaypalCheckout(
-      sandboxMode: (!kReleaseMode || await isIqonicProduct),
+      sandboxMode: (!kReleaseMode || await isVarchaswaaProduct),
       clientId: clientId,
       secretKey: secretKey,
       returnURL: "junedr375.github.io/junedr375-payment/",
@@ -28,7 +28,7 @@ class PayPalService {
         {
           "amount": {
             "total": totalAmount,
-            "currency": await isIqonicProduct ? payPalSupportedCurrency : appCurrency.value.currencyCode,
+            "currency": await isVarchaswaaProduct ? payPalSupportedCurrency : appCurrency.value.currencyCode,
             "details": {"subtotal": totalAmount, "shipping": '0', "shipping_discount": 0}
           },
           "description": 'Name: ${loginUserData.value.firstName} - Email: ${loginUserData.value.email}',

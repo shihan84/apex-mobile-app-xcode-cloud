@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:streamit_laravel/generated/assets.dart';
+import 'package:apexprime_tv/generated/assets.dart';
 
 import '../../main.dart';
 import '../../utils/common_functions.dart';

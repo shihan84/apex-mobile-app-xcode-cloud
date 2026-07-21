@@ -177,6 +177,6 @@ Base URL: `https://apexprimetv.com/api`
 
 | Service | Value |
 |---|---|
-| Backend Admin | admin@streamit.com / password |
+| Backend Admin | admin@ApexPrimeTv.com / password |
 | Firebase Project | apexprime-ott |
 | DB | u894221422_apexprimetv |

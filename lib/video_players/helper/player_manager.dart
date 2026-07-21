@@ -10,16 +10,16 @@ import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:pod_player/pod_player.dart';
-import 'package:streamit_laravel/ads/models/ad_config.dart';
-import 'package:streamit_laravel/components/app_dialog_widget.dart';
-import 'package:streamit_laravel/configs.dart';
-import 'package:streamit_laravel/utils/cast/available_devices_for_cast.dart';
-import 'package:streamit_laravel/utils/cast/controller/fc_cast_controller.dart';
-import 'package:streamit_laravel/utils/cast/flutter_chrome_cast_widget.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
-import 'package:streamit_laravel/utils/constants.dart';
-import 'package:streamit_laravel/video_players/helper/embedded_player_helper.dart';
+import 'package:apexprime_tv/ads/models/ad_config.dart';
+import 'package:apexprime_tv/components/app_dialog_widget.dart';
+import 'package:apexprime_tv/configs.dart';
+import 'package:apexprime_tv/utils/cast/available_devices_for_cast.dart';
+import 'package:apexprime_tv/utils/cast/controller/fc_cast_controller.dart';
+import 'package:apexprime_tv/utils/cast/flutter_chrome_cast_widget.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
+import 'package:apexprime_tv/utils/constants.dart';
+import 'package:apexprime_tv/video_players/helper/embedded_player_helper.dart';
 
 class PlayerManager {
   // --- Controllers ---

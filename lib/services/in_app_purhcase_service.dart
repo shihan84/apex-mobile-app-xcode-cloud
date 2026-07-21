@@ -2,12 +2,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
-import 'package:streamit_laravel/controllers/base_controller.dart';
-import 'package:streamit_laravel/screens/subscription/model/subscription_plan_model.dart';
-import 'package:streamit_laravel/services/local_storage_service.dart';
-import 'package:streamit_laravel/utils/api_end_points.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
-import 'package:streamit_laravel/utils/constants.dart';
+import 'package:apexprime_tv/controllers/base_controller.dart';
+import 'package:apexprime_tv/screens/subscription/model/subscription_plan_model.dart';
+import 'package:apexprime_tv/services/local_storage_service.dart';
+import 'package:apexprime_tv/utils/api_end_points.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
+import 'package:apexprime_tv/utils/constants.dart';
 
 import '../network/core_api.dart';
 

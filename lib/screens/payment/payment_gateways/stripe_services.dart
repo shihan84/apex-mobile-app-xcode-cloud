@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/main.dart';
+import 'package:apexprime_tv/main.dart';
 
 import '../../../configs.dart';
 import '../../../network/network_utils.dart';
@@ -106,7 +106,7 @@ class StripeServices {
 
       var body = {
         'amount': (amount * 100).toInt().toString(),
-        'currency': await isIqonicProduct ? STRIPE_CURRENCY_CODE : appCurrency.value.currencyCode,
+        'currency': await isVarchaswaaProduct ? STRIPE_CURRENCY_CODE : appCurrency.value.currencyCode,
         'description': 'Name: ${loginUserData.value.firstName} - Email: ${loginUserData.value.email}',
         'shipping[name]': name,
         'shipping[address][line1]': addressLine1,

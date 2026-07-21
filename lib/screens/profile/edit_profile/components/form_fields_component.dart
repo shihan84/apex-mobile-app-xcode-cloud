@@ -5,12 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/generated/assets.dart';
-import 'package:streamit_laravel/utils/constants.dart';
-import 'package:streamit_laravel/utils/country_picker/country_list.dart';
-import 'package:streamit_laravel/utils/country_picker/country_utils.dart';
-import 'package:streamit_laravel/utils/extension/string_extension.dart';
-import 'package:streamit_laravel/utils/gender.dart';
+import 'package:apexprime_tv/generated/assets.dart';
+import 'package:apexprime_tv/utils/constants.dart';
+import 'package:apexprime_tv/utils/country_picker/country_list.dart';
+import 'package:apexprime_tv/utils/country_picker/country_utils.dart';
+import 'package:apexprime_tv/utils/extension/string_extension.dart';
+import 'package:apexprime_tv/utils/gender.dart';
 
 import '../../../../main.dart';
 import '../../../../utils/colors.dart';

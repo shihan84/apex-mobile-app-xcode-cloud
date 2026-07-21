@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
-import 'package:streamit_laravel/utils/constants.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
+import 'package:apexprime_tv/utils/constants.dart';
 
 import '../../../components/shimmer_widget.dart';
 

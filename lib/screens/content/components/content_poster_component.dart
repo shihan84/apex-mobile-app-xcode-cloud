@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/generated/assets.dart';
-import 'package:streamit_laravel/screens/content/content_details_controller.dart';
-import 'package:streamit_laravel/screens/content/content_details_screen.dart';
-import 'package:streamit_laravel/screens/content/model/content_model.dart';
-import 'package:streamit_laravel/screens/dashboard/dashboard_controller.dart';
-import 'package:streamit_laravel/screens/live_tv/live_tv_details/live_tv_details_controller.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
+import 'package:apexprime_tv/generated/assets.dart';
+import 'package:apexprime_tv/screens/content/content_details_controller.dart';
+import 'package:apexprime_tv/screens/content/content_details_screen.dart';
+import 'package:apexprime_tv/screens/content/model/content_model.dart';
+import 'package:apexprime_tv/screens/dashboard/dashboard_controller.dart';
+import 'package:apexprime_tv/screens/live_tv/live_tv_details/live_tv_details_controller.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
 
 import '../../../components/cached_image_widget.dart';
 import '../../../main.dart';

@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/shimmer_widget.dart';
+import 'package:apexprime_tv/components/shimmer_widget.dart';
 
 class CachedImageWidget extends StatelessWidget {
   final String url;

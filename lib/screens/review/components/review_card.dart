@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_dialog_widget.dart';
-import 'package:streamit_laravel/components/cached_image_widget.dart';
-import 'package:streamit_laravel/generated/assets.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/screens/review/model/review_model.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
-import 'package:streamit_laravel/utils/extension/string_extension.dart';
+import 'package:apexprime_tv/components/app_dialog_widget.dart';
+import 'package:apexprime_tv/components/cached_image_widget.dart';
+import 'package:apexprime_tv/generated/assets.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/screens/review/model/review_model.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
+import 'package:apexprime_tv/utils/extension/string_extension.dart';
 
 class ReviewCard extends StatelessWidget {
   final ReviewModel reviewDetail;

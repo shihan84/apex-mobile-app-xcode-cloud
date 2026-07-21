@@ -9,7 +9,7 @@
 
     <!-- Specific allowed domain -->
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">apps.iqonic.design</domain>
+        <domain includeSubdomains="true">apps.varchaswaa.design</domain>
     </domain-config>
 
     <!-- Common local IPs -->

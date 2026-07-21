@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/screens/content/model/content_model.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/video_players/component/common/rent_detail_bottomsheet_controller.dart';
+import 'package:apexprime_tv/screens/content/model/content_model.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/video_players/component/common/rent_detail_bottomsheet_controller.dart';
 
 import '../../../main.dart';
 import '../../../utils/constants.dart' show MovieAccess;

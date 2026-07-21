@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/screens/dashboard/dashboard_controller.dart';
-import 'package:streamit_laravel/screens/dashboard/dashboard_screen.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
+import 'package:apexprime_tv/screens/dashboard/dashboard_controller.dart';
+import 'package:apexprime_tv/screens/dashboard/dashboard_screen.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
 
 import '../../../components/app_scaffold.dart';
 import '../../../generated/assets.dart';

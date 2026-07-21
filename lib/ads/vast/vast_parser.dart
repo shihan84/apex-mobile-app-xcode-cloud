@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/ads/models/vast_media.dart';
-import 'package:streamit_laravel/network/network_utils.dart';
+import 'package:apexprime_tv/ads/models/vast_media.dart';
+import 'package:apexprime_tv/network/network_utils.dart';
 import 'package:xml/xml.dart' as xml;
 
 /// Robust VAST parser with CDATA-safe extraction and NonLinear (overlay) support.

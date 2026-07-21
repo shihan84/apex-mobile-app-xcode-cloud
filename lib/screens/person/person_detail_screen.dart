@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_no_data_widget.dart';
-import 'package:streamit_laravel/components/app_scaffold.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/screens/content/components/content_poster_component.dart';
-import 'package:streamit_laravel/screens/content/content_list_shimmer.dart';
-import 'package:streamit_laravel/screens/content/model/content_model.dart';
-import 'package:streamit_laravel/screens/person/components/person_details.dart';
-import 'package:streamit_laravel/screens/person/components/person_profile.dart';
-import 'package:streamit_laravel/screens/person/person_controller.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
-import 'package:streamit_laravel/utils/empty_error_state_widget.dart';
-import 'package:streamit_laravel/utils/extension/string_extension.dart';
+import 'package:apexprime_tv/components/app_no_data_widget.dart';
+import 'package:apexprime_tv/components/app_scaffold.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/screens/content/components/content_poster_component.dart';
+import 'package:apexprime_tv/screens/content/content_list_shimmer.dart';
+import 'package:apexprime_tv/screens/content/model/content_model.dart';
+import 'package:apexprime_tv/screens/person/components/person_details.dart';
+import 'package:apexprime_tv/screens/person/components/person_profile.dart';
+import 'package:apexprime_tv/screens/person/person_controller.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
+import 'package:apexprime_tv/utils/empty_error_state_widget.dart';
+import 'package:apexprime_tv/utils/extension/string_extension.dart';
 
 class PersonDetailScreen extends StatelessWidget {
   final Cast personDet;

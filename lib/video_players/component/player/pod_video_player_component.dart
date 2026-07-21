@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pod_player/pod_player.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
-import 'package:streamit_laravel/utils/constants.dart';
-import 'package:streamit_laravel/video_players/component/common/custom_overlay.dart';
-import 'package:streamit_laravel/video_players/video_player_controller.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
+import 'package:apexprime_tv/utils/constants.dart';
+import 'package:apexprime_tv/video_players/component/common/custom_overlay.dart';
+import 'package:apexprime_tv/video_players/video_player_controller.dart';
 
 class PodVideoPlayerComponent extends StatelessWidget {
   final VideoPlayersController controller;

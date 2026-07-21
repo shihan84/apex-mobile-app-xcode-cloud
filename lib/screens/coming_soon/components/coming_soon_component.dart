@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/generated/assets.dart';
-import 'package:streamit_laravel/screens/coming_soon/model/coming_soon_response.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
+import 'package:apexprime_tv/generated/assets.dart';
+import 'package:apexprime_tv/screens/coming_soon/model/coming_soon_response.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
 
 import '../../../components/cached_image_widget.dart';
 import '../../../main.dart';

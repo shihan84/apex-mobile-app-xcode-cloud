@@ -3,7 +3,7 @@ import 'package:audio_session/audio_session.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/network/core_api.dart';
+import 'package:apexprime_tv/network/core_api.dart';
 import '../models/music_model.dart';
 
 enum AudioRepeatMode { none, one, all }

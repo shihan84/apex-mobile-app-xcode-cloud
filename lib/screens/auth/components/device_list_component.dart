@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_dialog_widget.dart';
-import 'package:streamit_laravel/screens/account_setting/components/logout_account_component.dart';
-import 'package:streamit_laravel/screens/device/device_component.dart';
-import 'package:streamit_laravel/screens/device/model/device_model.dart';
+import 'package:apexprime_tv/components/app_dialog_widget.dart';
+import 'package:apexprime_tv/screens/account_setting/components/logout_account_component.dart';
+import 'package:apexprime_tv/screens/device/device_component.dart';
+import 'package:apexprime_tv/screens/device/model/device_model.dart';
 
 import '../../../main.dart';
 import '../../../utils/colors.dart';

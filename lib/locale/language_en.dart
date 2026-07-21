@@ -1,4 +1,4 @@
-import 'package:streamit_laravel/configs.dart';
+import 'package:apexprime_tv/configs.dart';
 
 import 'languages.dart';
 
@@ -184,7 +184,7 @@ class LanguageEn extends BaseLanguage {
   String get optionDesp => 'Explore curated shows across genres tailored to suit your viewing preferences.';
 
   @override
-  String get welcomeBackToStreamIt => 'Welcome Back to $APP_NAME!';
+  String get welcomeBackToApexPrimeTv => 'Welcome Back to $APP_NAME!';
 
   @override
   String get weHaveEagerlyAwaitedYourReturn => 'We have eagerly awaited your return.';
@@ -739,7 +739,7 @@ class LanguageEn extends BaseLanguage {
   String get whatYourMobileNo => "What's Your Mobile Number";
 
   @override
-  String get withAValidMobileNumberYouCanConnectWithStreamit => 'With a valid mobile number you can connect with ApexPrimeTV';
+  String get withAValidMobileNumberYouCanConnectWithApexPrime Tv => 'With a valid mobile number you can connect with ApexPrimeTV';
 
   @override
   String get otpSentToYourSMS => 'OTP Sent To Your SMS!';

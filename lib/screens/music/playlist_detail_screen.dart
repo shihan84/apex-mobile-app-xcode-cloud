@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:streamit_laravel/network/core_api.dart';
-import 'package:streamit_laravel/screens/music/models/music_model.dart';
-import 'package:streamit_laravel/screens/music/services/audio_player_service.dart';
+import 'package:apexprime_tv/network/core_api.dart';
+import 'package:apexprime_tv/screens/music/models/music_model.dart';
+import 'package:apexprime_tv/screens/music/services/audio_player_service.dart';
 
 class PlaylistDetailScreen extends StatefulWidget {
   final int playlistId;

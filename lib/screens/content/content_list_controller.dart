@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:streamit_laravel/controllers/base_controller.dart';
-import 'package:streamit_laravel/models/base_response_model.dart';
-import 'package:streamit_laravel/network/core_api.dart';
-import 'package:streamit_laravel/screens/content/model/content_model.dart';
-import 'package:streamit_laravel/screens/slider/slider_controller.dart';
-import 'package:streamit_laravel/utils/api_end_points.dart';
+import 'package:apexprime_tv/controllers/base_controller.dart';
+import 'package:apexprime_tv/models/base_response_model.dart';
+import 'package:apexprime_tv/network/core_api.dart';
+import 'package:apexprime_tv/screens/content/model/content_model.dart';
+import 'package:apexprime_tv/screens/slider/slider_controller.dart';
+import 'package:apexprime_tv/utils/api_end_points.dart';
 
 class ContentListController extends BaseListController<PosterDataModel> {
   SliderController sliderController = SliderController();

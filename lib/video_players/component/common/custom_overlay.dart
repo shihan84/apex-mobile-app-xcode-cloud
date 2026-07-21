@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/cached_image_widget.dart';
-import 'package:streamit_laravel/generated/assets.dart';
-import 'package:streamit_laravel/screens/live_tv/components/live_card.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
+import 'package:apexprime_tv/components/cached_image_widget.dart';
+import 'package:apexprime_tv/generated/assets.dart';
+import 'package:apexprime_tv/screens/live_tv/components/live_card.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
 
 import 'custom_progress_bar.dart';
 

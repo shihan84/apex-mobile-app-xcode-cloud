@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/configs.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
+import 'package:apexprime_tv/configs.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
 
 import '../../../utils/colors.dart';
 
@@ -36,7 +36,7 @@ class PayStackService {
       ..amount = price
       ..reference = 'ref_${DateTime.now().millisecondsSinceEpoch}'
       ..email = loginUserData.value.email
-      ..currency = await isIqonicProduct ? payStackCurrency : appCurrency.value.currencyCode;
+      ..currency = await isVarchaswaaProduct ? payStackCurrency : appCurrency.value.currencyCode;
 
     CheckoutResponse response = await payStackPlugin.checkout(
       Get.context!,

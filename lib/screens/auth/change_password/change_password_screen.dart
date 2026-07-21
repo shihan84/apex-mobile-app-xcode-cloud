@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_logo_widget.dart';
-import 'package:streamit_laravel/components/app_scaffold.dart';
-import 'package:streamit_laravel/components/successfull_dialogbox.dart';
-import 'package:streamit_laravel/screens/auth/sign_in/sign_in_screen.dart';
+import 'package:apexprime_tv/components/app_logo_widget.dart';
+import 'package:apexprime_tv/components/app_scaffold.dart';
+import 'package:apexprime_tv/components/successfull_dialogbox.dart';
+import 'package:apexprime_tv/screens/auth/sign_in/sign_in_screen.dart';
 
 import '../../../generated/assets.dart';
 import '../../../main.dart';

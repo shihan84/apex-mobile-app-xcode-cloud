@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_no_data_widget.dart';
-import 'package:streamit_laravel/components/app_scaffold.dart';
-import 'package:streamit_laravel/components/shimmer_widget.dart';
-import 'package:streamit_laravel/generated/assets.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/screens/auth/model/about_page_res.dart';
-import 'package:streamit_laravel/screens/setting/faq/f_a_q_screen.dart';
-import 'package:streamit_laravel/screens/setting/help_and_support/help_and_support_controller.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
-import 'package:streamit_laravel/utils/constants.dart';
-import 'package:streamit_laravel/utils/empty_error_state_widget.dart';
-import 'package:streamit_laravel/utils/extension/string_extension.dart';
+import 'package:apexprime_tv/components/app_no_data_widget.dart';
+import 'package:apexprime_tv/components/app_scaffold.dart';
+import 'package:apexprime_tv/components/shimmer_widget.dart';
+import 'package:apexprime_tv/generated/assets.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/screens/auth/model/about_page_res.dart';
+import 'package:apexprime_tv/screens/setting/faq/f_a_q_screen.dart';
+import 'package:apexprime_tv/screens/setting/help_and_support/help_and_support_controller.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
+import 'package:apexprime_tv/utils/constants.dart';
+import 'package:apexprime_tv/utils/empty_error_state_widget.dart';
+import 'package:apexprime_tv/utils/extension/string_extension.dart';
 
 class HelpAndSupportScreen extends StatelessWidget {
   HelpAndSupportScreen({super.key});

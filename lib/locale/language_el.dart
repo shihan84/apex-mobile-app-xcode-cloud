@@ -1,5 +1,5 @@
-import 'package:streamit_laravel/configs.dart';
-import 'package:streamit_laravel/locale/languages.dart';
+import 'package:apexprime_tv/configs.dart';
+import 'package:apexprime_tv/locale/languages.dart';
 
 class LanguageEl extends BaseLanguage {
   @override
@@ -183,7 +183,7 @@ class LanguageEl extends BaseLanguage {
   String get optionDesp => 'Εξερευνήστε επιμελημένες εκπομπές σε διάφορα είδη προσαρμοσμένες στις προτιμήσεις θέασής σας.';
 
   @override
-  String get welcomeBackToStreamIt => 'Καλώς ήρθατε πίσω στο $APP_NAME!';
+  String get welcomeBackToApexPrimeTv => 'Καλώς ήρθατε πίσω στο $APP_NAME!';
 
   @override
   String get weHaveEagerlyAwaitedYourReturn => 'Περιμέναμε με ανυπομονησία την επιστροφή σας.';
@@ -732,7 +732,7 @@ class LanguageEl extends BaseLanguage {
   String get whatYourMobileNo => 'Ποιος είναι ο αριθμός κινητού σας';
 
   @override
-  String get withAValidMobileNumberYouCanConnectWithStreamit => 'Με έναν έγκυρο αριθμό κινητού μπορείτε να συνδεθείτε με το Streamit';
+  String get withAValidMobileNumberYouCanConnectWithApexPrime Tv => 'Με έναν έγκυρο αριθμό κινητού μπορείτε να συνδεθείτε με το ApexPrime Tv';
 
   @override
   String get otpSentToYourSMS => 'Το OTP στάλθηκε στο SMS σας!';

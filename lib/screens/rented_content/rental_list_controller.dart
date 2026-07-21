@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:streamit_laravel/controllers/base_controller.dart';
-import 'package:streamit_laravel/screens/content/model/content_model.dart';
+import 'package:apexprime_tv/controllers/base_controller.dart';
+import 'package:apexprime_tv/screens/content/model/content_model.dart';
 
 import '../../network/core_api.dart';
 

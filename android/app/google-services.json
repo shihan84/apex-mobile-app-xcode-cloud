@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "903667670865-qg7fv9ga2kjg0p7q26gthj3pt52vq466.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apexprime.ott",
+            "certificate_hash": "6bf805777910f37f77fbde635ca12c20fede1c22"
+          }
+        },
+        {
           "client_id": "903667670865-amn509gdkug9nf13uvu9j9on1lqeka8n.apps.googleusercontent.com",
           "client_type": 3
         }

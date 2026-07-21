@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/screens/downloads/models/hive_content_model.dart';
-import 'package:streamit_laravel/screens/downloads/models/hive_poster_model.dart';
-import 'package:streamit_laravel/services/encryption_service.dart';
-import 'package:streamit_laravel/utils/constants.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/screens/downloads/models/hive_content_model.dart';
+import 'package:apexprime_tv/screens/downloads/models/hive_poster_model.dart';
+import 'package:apexprime_tv/services/encryption_service.dart';
+import 'package:apexprime_tv/utils/constants.dart';
 
 class HiveService {
   static const String contentBoxName = 'contentBox';

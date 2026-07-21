@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:streamit_laravel/screens/downloads/models/hive_content_model.dart';
+import 'package:apexprime_tv/screens/downloads/models/hive_content_model.dart';
 
 import 'download_service.dart';
 

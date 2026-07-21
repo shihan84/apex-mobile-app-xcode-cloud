@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_logo_widget.dart';
-import 'package:streamit_laravel/components/no_internet_widget.dart';
-import 'package:streamit_laravel/controllers/connectivity_controller.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
+import 'package:apexprime_tv/components/app_logo_widget.dart';
+import 'package:apexprime_tv/components/no_internet_widget.dart';
+import 'package:apexprime_tv/controllers/connectivity_controller.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
 
 import '../components/app_scaffold.dart';
 import '../utils/colors.dart';

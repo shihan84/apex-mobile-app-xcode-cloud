@@ -1,6 +1,6 @@
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/controllers/base_controller.dart';
-import 'package:streamit_laravel/screens/subscription/model/subscription_plan_model.dart';
+import 'package:apexprime_tv/controllers/base_controller.dart';
+import 'package:apexprime_tv/screens/subscription/model/subscription_plan_model.dart';
 
 import '../../../network/core_api.dart';
 import '../../../utils/common_functions.dart';

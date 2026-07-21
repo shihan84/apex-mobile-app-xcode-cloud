@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/generated/assets.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/screens/subscription/model/rental_history_model.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
-import 'package:streamit_laravel/utils/price_widget.dart';
+import 'package:apexprime_tv/generated/assets.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/screens/subscription/model/rental_history_model.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
+import 'package:apexprime_tv/utils/price_widget.dart';
 
 class RentedHistoryCard extends StatelessWidget {
   final RentalHistoryItem rentalHistory;

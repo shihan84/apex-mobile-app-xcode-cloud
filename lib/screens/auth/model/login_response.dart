@@ -1,5 +1,5 @@
-import 'package:streamit_laravel/screens/subscription/model/subscription_plan_model.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
+import 'package:apexprime_tv/screens/subscription/model/subscription_plan_model.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
 
 class UserResponse {
   bool status;

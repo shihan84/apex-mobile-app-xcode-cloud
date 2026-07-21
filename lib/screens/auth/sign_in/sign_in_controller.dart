@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_dialog_widget.dart';
-import 'package:streamit_laravel/controllers/base_controller.dart';
-import 'package:streamit_laravel/network/auth_apis.dart';
-import 'package:streamit_laravel/screens/profile/watching_profile/watching_profile_screen.dart';
-import 'package:streamit_laravel/services/local_storage_service.dart';
-import 'package:streamit_laravel/services/notification_service.dart';
-import 'package:streamit_laravel/utils/api_end_points.dart';
+import 'package:apexprime_tv/components/app_dialog_widget.dart';
+import 'package:apexprime_tv/controllers/base_controller.dart';
+import 'package:apexprime_tv/network/auth_apis.dart';
+import 'package:apexprime_tv/screens/profile/watching_profile/watching_profile_screen.dart';
+import 'package:apexprime_tv/services/local_storage_service.dart';
+import 'package:apexprime_tv/services/notification_service.dart';
+import 'package:apexprime_tv/utils/api_end_points.dart';
 
 import '../../../configs.dart';
 import '../../../main.dart';
@@ -75,7 +75,7 @@ class SignInController extends BaseController {
   }
 
   Future<void> _applyDemoCredentialState() async {
-    final bool shouldShowDemoCredentials = appConfigs.value.enableDemoLogin && await isIqonicProduct;
+    final bool shouldShowDemoCredentials = appConfigs.value.enableDemoLogin && await isVarchaswaaProduct;
 
     if (shouldShowDemoCredentials) {
       emailCont.text = Constants.DEFAULT_EMAIL;

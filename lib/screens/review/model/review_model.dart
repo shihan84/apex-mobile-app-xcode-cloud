@@ -1,4 +1,4 @@
-import 'package:streamit_laravel/configs.dart';
+import 'package:apexprime_tv/configs.dart';
 
 class ReviewResponse {
   bool status;

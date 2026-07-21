@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/screens/downloads/models/hive_content_model.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/screens/downloads/models/hive_content_model.dart';
 
 import 'encryption_service.dart';
 

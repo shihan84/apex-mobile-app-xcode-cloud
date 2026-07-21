@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_no_data_widget.dart';
-import 'package:streamit_laravel/screens/coming_soon/coming_soon_controller.dart';
-import 'package:streamit_laravel/screens/coming_soon/shimmer_coming_soon.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/extension/string_extension.dart';
+import 'package:apexprime_tv/components/app_no_data_widget.dart';
+import 'package:apexprime_tv/screens/coming_soon/coming_soon_controller.dart';
+import 'package:apexprime_tv/screens/coming_soon/shimmer_coming_soon.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/extension/string_extension.dart';
 
 import '../../components/app_scaffold.dart';
 import '../../main.dart';

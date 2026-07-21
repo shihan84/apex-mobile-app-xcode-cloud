@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/ads/custom_ads/custom_ads.dart';
-import 'package:streamit_laravel/ads/vast/vast_parser.dart';
+import 'package:apexprime_tv/ads/custom_ads/custom_ads.dart';
+import 'package:apexprime_tv/ads/vast/vast_parser.dart';
 
 class PlayerAdsManager extends GetxController {
   final List<CustomAds> ads;

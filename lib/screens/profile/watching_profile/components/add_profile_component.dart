@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_dialog_widget.dart';
-import 'package:streamit_laravel/components/cached_image_widget.dart';
-import 'package:streamit_laravel/generated/assets.dart';
-import 'package:streamit_laravel/screens/profile/watching_profile/components/add_update_watching_profile_component.dart';
-import 'package:streamit_laravel/screens/profile/watching_profile/components/add_update_watching_profile_controller.dart';
-import 'package:streamit_laravel/utils/colors.dart';
+import 'package:apexprime_tv/components/app_dialog_widget.dart';
+import 'package:apexprime_tv/components/cached_image_widget.dart';
+import 'package:apexprime_tv/generated/assets.dart';
+import 'package:apexprime_tv/screens/profile/watching_profile/components/add_update_watching_profile_component.dart';
+import 'package:apexprime_tv/screens/profile/watching_profile/components/add_update_watching_profile_controller.dart';
+import 'package:apexprime_tv/utils/colors.dart';
 
 class AddProfileComponent extends StatelessWidget {
   final double size;

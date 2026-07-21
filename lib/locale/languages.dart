@@ -123,7 +123,7 @@ abstract class BaseLanguage {
 
   String get optionDesp;
 
-  String get welcomeBackToStreamIt;
+  String get welcomeBackToApexPrimeTv;
 
   String get weHaveEagerlyAwaitedYourReturn;
 
@@ -492,7 +492,7 @@ abstract class BaseLanguage {
 
   String get whatYourMobileNo;
 
-  String get withAValidMobileNumberYouCanConnectWithStreamit;
+  String get withAValidMobileNumberYouCanConnectWithApexPrime Tv;
 
   String get otpSentToYourSMS;
 

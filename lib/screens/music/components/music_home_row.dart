@@ -3,11 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:streamit_laravel/screens/music/models/music_model.dart';
-import 'package:streamit_laravel/screens/music/music_controller.dart';
-import 'package:streamit_laravel/screens/music/music_player_screen.dart';
-import 'package:streamit_laravel/screens/music/music_screen.dart';
-import 'package:streamit_laravel/screens/music/services/audio_player_service.dart';
+import 'package:apexprime_tv/screens/music/models/music_model.dart';
+import 'package:apexprime_tv/screens/music/music_controller.dart';
+import 'package:apexprime_tv/screens/music/music_player_screen.dart';
+import 'package:apexprime_tv/screens/music/music_screen.dart';
+import 'package:apexprime_tv/screens/music/services/audio_player_service.dart';
 
 class MusicHomeRow extends StatelessWidget {
   const MusicHomeRow({super.key});

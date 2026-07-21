@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_no_data_widget.dart';
-import 'package:streamit_laravel/components/successfull_dialogbox.dart';
-import 'package:streamit_laravel/screens/coupon/coupan_list_component.dart';
-import 'package:streamit_laravel/screens/home/home_controller.dart';
-import 'package:streamit_laravel/screens/payment/components/payment_card_component.dart';
-import 'package:streamit_laravel/screens/payment/payment_controller.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
-import 'package:streamit_laravel/utils/constants.dart' show BannerType;
+import 'package:apexprime_tv/components/app_no_data_widget.dart';
+import 'package:apexprime_tv/components/successfull_dialogbox.dart';
+import 'package:apexprime_tv/screens/coupon/coupan_list_component.dart';
+import 'package:apexprime_tv/screens/home/home_controller.dart';
+import 'package:apexprime_tv/screens/payment/components/payment_card_component.dart';
+import 'package:apexprime_tv/screens/payment/payment_controller.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
+import 'package:apexprime_tv/utils/constants.dart' show BannerType;
 
 import '../../components/app_scaffold.dart';
 import '../../components/loader_widget.dart';

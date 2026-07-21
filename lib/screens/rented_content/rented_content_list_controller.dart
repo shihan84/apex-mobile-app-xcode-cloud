@@ -1,10 +1,10 @@
-import 'package:streamit_laravel/controllers/base_controller.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/network/core_api.dart';
+import 'package:apexprime_tv/controllers/base_controller.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/network/core_api.dart';
 
 import 'package:get/get.dart';
-import 'package:streamit_laravel/screens/content/model/content_model.dart';
-import 'package:streamit_laravel/utils/constants.dart';
+import 'package:apexprime_tv/screens/content/model/content_model.dart';
+import 'package:apexprime_tv/utils/constants.dart';
 
 class RentedContentListController extends BaseListController<PosterDataModel> {
   @override

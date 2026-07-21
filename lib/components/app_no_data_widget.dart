@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
 
 class AppNoDataWidget extends StatelessWidget {
   /// The URL or asset path of the image to display.

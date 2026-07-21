@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:streamit_laravel/ads/vast/vast_parser.dart';
-import 'package:streamit_laravel/ads/models/vast_media.dart';
+import 'package:apexprime_tv/ads/vast/vast_parser.dart';
+import 'package:apexprime_tv/ads/models/vast_media.dart';
 
 /// Serialize a [VastMedia] instance into a simple map that can travel across isolates.
 Map<String, dynamic> serializeVastMedia(VastMedia media) {

@@ -10,19 +10,19 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/locale/language_en.dart';
-import 'package:streamit_laravel/routes/app_routes.dart';
-import 'package:streamit_laravel/screens/auth/model/app_configuration_res.dart';
-import 'package:streamit_laravel/screens/auth/model/login_response.dart';
-import 'package:streamit_laravel/screens/coming_soon/model/coming_soon_response.dart';
-import 'package:streamit_laravel/screens/home/model/dashboard_res_model.dart';
-import 'package:streamit_laravel/screens/live_tv/model/live_tv_dashboard_response.dart';
-import 'package:streamit_laravel/services/encryption_service.dart';
-import 'package:streamit_laravel/services/hive_service.dart';
-import 'package:streamit_laravel/services/in_app_purhcase_service.dart';
-import 'package:streamit_laravel/services/local_storage_service.dart';
-import 'package:streamit_laravel/services/notification_service.dart';
-import 'package:streamit_laravel/utils/page_transition_builder.dart';
+import 'package:apexprime_tv/locale/language_en.dart';
+import 'package:apexprime_tv/routes/app_routes.dart';
+import 'package:apexprime_tv/screens/auth/model/app_configuration_res.dart';
+import 'package:apexprime_tv/screens/auth/model/login_response.dart';
+import 'package:apexprime_tv/screens/coming_soon/model/coming_soon_response.dart';
+import 'package:apexprime_tv/screens/home/model/dashboard_res_model.dart';
+import 'package:apexprime_tv/screens/live_tv/model/live_tv_dashboard_response.dart';
+import 'package:apexprime_tv/services/encryption_service.dart';
+import 'package:apexprime_tv/services/hive_service.dart';
+import 'package:apexprime_tv/services/in_app_purhcase_service.dart';
+import 'package:apexprime_tv/services/local_storage_service.dart';
+import 'package:apexprime_tv/services/notification_service.dart';
+import 'package:apexprime_tv/utils/page_transition_builder.dart';
 
 import 'app_theme.dart';
 import 'bindings/app_bindings.dart';
@@ -52,7 +52,7 @@ RxList<Cast> cachedPersonList = RxList();
 RxList<PosterDataModel> cachedSliderList = RxList();
 bool isNotificationRead = false;
 
-const platform = MethodChannel('flutter.iqonic.streamitlaravel.com.channel');
+const platform = MethodChannel('flutter.varchaswaa.apexprimetv.com.channel');
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

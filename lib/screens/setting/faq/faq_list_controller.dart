@@ -1,6 +1,6 @@
-import 'package:streamit_laravel/controllers/base_controller.dart';
-import 'package:streamit_laravel/network/core_api.dart';
-import 'package:streamit_laravel/screens/setting/model/faq_model.dart';
+import 'package:apexprime_tv/controllers/base_controller.dart';
+import 'package:apexprime_tv/network/core_api.dart';
+import 'package:apexprime_tv/screens/setting/model/faq_model.dart';
 
 class FAQListController extends BaseListController<FAQModel> {
   @override

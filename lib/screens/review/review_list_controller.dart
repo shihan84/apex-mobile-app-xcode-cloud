@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:streamit_laravel/controllers/base_controller.dart';
-import 'package:streamit_laravel/models/base_response_model.dart';
-import 'package:streamit_laravel/network/core_api.dart';
-import 'package:streamit_laravel/screens/content/content_details_controller.dart';
-import 'package:streamit_laravel/screens/review/model/review_model.dart';
-import 'package:streamit_laravel/utils/api_end_points.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
+import 'package:apexprime_tv/controllers/base_controller.dart';
+import 'package:apexprime_tv/models/base_response_model.dart';
+import 'package:apexprime_tv/network/core_api.dart';
+import 'package:apexprime_tv/screens/content/content_details_controller.dart';
+import 'package:apexprime_tv/screens/review/model/review_model.dart';
+import 'package:apexprime_tv/utils/api_end_points.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
 
 class ReviewListController extends BaseListController<ReviewModel> {
   RxBool isBtnEnable = false.obs;

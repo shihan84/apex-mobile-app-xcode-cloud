@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
 import 'package:palette_generator/palette_generator.dart';
-import 'package:streamit_laravel/network/core_api.dart';
-import 'package:streamit_laravel/screens/music/music_controller.dart';
-import 'package:streamit_laravel/screens/music/services/audio_player_service.dart';
+import 'package:apexprime_tv/network/core_api.dart';
+import 'package:apexprime_tv/screens/music/music_controller.dart';
+import 'package:apexprime_tv/screens/music/services/audio_player_service.dart';
 import 'models/music_model.dart';
 
 class MusicPlayerScreen extends StatefulWidget {

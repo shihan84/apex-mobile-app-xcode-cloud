@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/shimmer_widget.dart';
-import 'package:streamit_laravel/utils/constants.dart';
+import 'package:apexprime_tv/components/shimmer_widget.dart';
+import 'package:apexprime_tv/utils/constants.dart';
 
 class ContentDetailsShimmer extends StatelessWidget {
   const ContentDetailsShimmer({super.key});

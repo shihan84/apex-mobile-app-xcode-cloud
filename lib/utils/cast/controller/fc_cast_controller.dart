@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:flutter_chrome_cast/lib.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/ads/models/ad_config.dart';
-import 'package:streamit_laravel/configs.dart';
-import 'package:streamit_laravel/main.dart';
+import 'package:apexprime_tv/ads/models/ad_config.dart';
+import 'package:apexprime_tv/configs.dart';
+import 'package:apexprime_tv/main.dart';
 
 class FCCast extends GetxController {
   RxBool isSearchingForDevice = false.obs;

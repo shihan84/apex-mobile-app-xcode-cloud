@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:streamit_laravel/ads/custom_ads/custom_ads.dart';
-import 'package:streamit_laravel/ads/video_player_ads/custom_ad_widget.dart';
+import 'package:apexprime_tv/ads/custom_ads/custom_ads.dart';
+import 'package:apexprime_tv/ads/video_player_ads/custom_ad_widget.dart';
 
 class BannerAdComponent extends StatelessWidget {
   final double bannerHeight;

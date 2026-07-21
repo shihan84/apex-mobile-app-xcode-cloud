@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:nb_utils/nb_utils.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:streamit_laravel/configs.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/network/network_utils.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
+import 'package:apexprime_tv/configs.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/network/network_utils.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
 
 class RazorPayService {
   static late Razorpay razorPay;
@@ -89,7 +89,7 @@ class RazorPayService {
       'payment_capture': 1,
       'description': APP_NAME,
       'image': APP_MINI_LOGO_URL,
-      'currency': await isIqonicProduct ? commonSupportedCurrency : appCurrency.value.currencyCode,
+      'currency': await isVarchaswaaProduct ? commonSupportedCurrency : appCurrency.value.currencyCode,
       'prefill': {'contact': loginUserData.value.mobile, 'email': loginUserData.value.email},
       'external': {
         'wallets': ['paytm']
@@ -114,7 +114,7 @@ class RazorPayService {
       endPoint: 'https://api.razorpay.com/v1/orders',
       request: {
         "amount": (amount * 100).round(),
-        'currency': await isIqonicProduct ? commonSupportedCurrency : appCurrency.value.currencyCode,
+        'currency': await isVarchaswaaProduct ? commonSupportedCurrency : appCurrency.value.currencyCode,
         "receipt": generateReceipt(),
       },
       header: buildHeaderForRazorpay(secretKey, publicKey),
@@ -138,7 +138,7 @@ class RazorPayService {
       endPoint: 'https://api.razorpay.com/v1/payments/$paymentId/capture',
       request: {
         "amount": (amount * 100).round(),
-        'currency': await isIqonicProduct ? commonSupportedCurrency : appCurrency.value.currencyCode,
+        'currency': await isVarchaswaaProduct ? commonSupportedCurrency : appCurrency.value.currencyCode,
       },
       header: buildHeaderForRazorpay(secretKey, publicKey),
     );

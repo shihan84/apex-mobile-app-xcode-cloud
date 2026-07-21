@@ -310,7 +310,7 @@ Fix FCM token sending to backend and test push notifications from admin panel.
 - **Database**: MariaDB 11.8.3
 - **Framework**: Laravel 12
 - **Admin Panel**: https://apexprimetv.com/admin/login
-- **Admin Credentials**: admin@streamit.com / password
+- **Admin Credentials**: admin@ApexPrimeTv.com / password
 
 ### Firebase Configuration
 - **Firebase SDK**: 12.8.0

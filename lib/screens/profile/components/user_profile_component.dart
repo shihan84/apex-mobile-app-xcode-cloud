@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/shimmer_widget.dart';
-import 'package:streamit_laravel/generated/assets.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/screens/dashboard/dashboard_controller.dart';
-import 'package:streamit_laravel/screens/dashboard/dashboard_screen.dart';
-import 'package:streamit_laravel/screens/home/home_controller.dart';
-import 'package:streamit_laravel/screens/profile/watching_profile/components/add_profile_component.dart';
-import 'package:streamit_laravel/screens/profile/watching_profile/components/profile_component.dart';
-import 'package:streamit_laravel/screens/profile/watching_profile/model/profile_watching_model.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
+import 'package:apexprime_tv/components/shimmer_widget.dart';
+import 'package:apexprime_tv/generated/assets.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/screens/dashboard/dashboard_controller.dart';
+import 'package:apexprime_tv/screens/dashboard/dashboard_screen.dart';
+import 'package:apexprime_tv/screens/home/home_controller.dart';
+import 'package:apexprime_tv/screens/profile/watching_profile/components/add_profile_component.dart';
+import 'package:apexprime_tv/screens/profile/watching_profile/components/profile_component.dart';
+import 'package:apexprime_tv/screens/profile/watching_profile/model/profile_watching_model.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
 
 class UserProfileComponent extends StatelessWidget {
   final RxBool isLoading;

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_dialog_widget.dart';
-import 'package:streamit_laravel/generated/assets.dart';
-import 'package:streamit_laravel/screens/content/model/content_model.dart';
-import 'package:streamit_laravel/screens/payment/payment_screen.dart';
-import 'package:streamit_laravel/screens/profile/watching_profile/components/profile_component.dart';
-import 'package:streamit_laravel/screens/profile/watching_profile/model/profile_watching_model.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
-import 'package:streamit_laravel/utils/constants.dart';
-import 'package:streamit_laravel/utils/shimmer/shimmer.dart';
+import 'package:apexprime_tv/components/app_dialog_widget.dart';
+import 'package:apexprime_tv/generated/assets.dart';
+import 'package:apexprime_tv/screens/content/model/content_model.dart';
+import 'package:apexprime_tv/screens/payment/payment_screen.dart';
+import 'package:apexprime_tv/screens/profile/watching_profile/components/profile_component.dart';
+import 'package:apexprime_tv/screens/profile/watching_profile/model/profile_watching_model.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
+import 'package:apexprime_tv/utils/constants.dart';
+import 'package:apexprime_tv/utils/shimmer/shimmer.dart';
 
 import '../../../components/cached_image_widget.dart';
 import '../../../main.dart';

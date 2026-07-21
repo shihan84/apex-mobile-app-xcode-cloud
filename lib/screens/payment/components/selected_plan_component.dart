@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/screens/content/model/content_model.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
-import 'package:streamit_laravel/utils/constants.dart' show MovieAccess;
-import 'package:streamit_laravel/utils/extension/date_time_extension.dart';
-import 'package:streamit_laravel/utils/price_widget.dart';
+import 'package:apexprime_tv/screens/content/model/content_model.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
+import 'package:apexprime_tv/utils/constants.dart' show MovieAccess;
+import 'package:apexprime_tv/utils/extension/date_time_extension.dart';
+import 'package:apexprime_tv/utils/price_widget.dart';
 
 import '../../../main.dart';
 import '../../subscription/model/subscription_plan_model.dart';

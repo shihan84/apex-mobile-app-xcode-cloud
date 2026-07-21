@@ -1,4 +1,4 @@
-import 'package:streamit_laravel/screens/content/model/content_model.dart';
+import 'package:apexprime_tv/screens/content/model/content_model.dart';
 
 class LiveShowDetailResponse {
   bool status;

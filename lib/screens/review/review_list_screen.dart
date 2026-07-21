@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/components/app_dialog_widget.dart';
-import 'package:streamit_laravel/components/app_no_data_widget.dart';
-import 'package:streamit_laravel/screens/review/components/review_card.dart';
-import 'package:streamit_laravel/screens/review/review_list_controller.dart';
-import 'package:streamit_laravel/screens/review/shimmer_review_list/shimmer_review_list.dart';
-import 'package:streamit_laravel/utils/colors.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
-import 'package:streamit_laravel/utils/extension/string_extension.dart';
+import 'package:apexprime_tv/components/app_dialog_widget.dart';
+import 'package:apexprime_tv/components/app_no_data_widget.dart';
+import 'package:apexprime_tv/screens/review/components/review_card.dart';
+import 'package:apexprime_tv/screens/review/review_list_controller.dart';
+import 'package:apexprime_tv/screens/review/shimmer_review_list/shimmer_review_list.dart';
+import 'package:apexprime_tv/utils/colors.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
+import 'package:apexprime_tv/utils/extension/string_extension.dart';
 
 import '../../components/app_scaffold.dart';
 import '../../main.dart';

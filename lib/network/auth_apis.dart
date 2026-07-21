@@ -1,7 +1,7 @@
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/screens/profile/model/profile_detail_resp.dart';
-import 'package:streamit_laravel/services/local_storage_service.dart';
-import 'package:streamit_laravel/utils/common_base.dart';
+import 'package:apexprime_tv/screens/profile/model/profile_detail_resp.dart';
+import 'package:apexprime_tv/services/local_storage_service.dart';
+import 'package:apexprime_tv/utils/common_base.dart';
 
 import '../models/base_response_model.dart';
 import '../screens/auth/model/change_password_res.dart';
@@ -19,7 +19,7 @@ class AuthServiceApis {
   }
 
   static Future<void> loginUser({required Map<String, dynamic> request, bool isSocialLogin = false}) async {
-    if (await isIqonicProduct && (request[ApiRequestKeys.mobile] == Constants.defaultNumber || request[ApiRequestKeys.email] == Constants.DEFAULT_EMAIL)) {
+    if (await isVarchaswaaProduct && (request[ApiRequestKeys.mobile] == Constants.defaultNumber || request[ApiRequestKeys.email] == Constants.DEFAULT_EMAIL)) {
       setBoolToLocal(SharedPreferenceConst.IS_DEMO_USER, true);
     }
     setStringToLocal(SharedPreferenceConst.USER_PASSWORD, request[ApiRequestKeys.password]);

@@ -1,9 +1,9 @@
 import 'package:nb_utils/nb_utils.dart';
-import 'package:streamit_laravel/ads/managers/ad_manager.dart';
-import 'package:streamit_laravel/main.dart';
-import 'package:streamit_laravel/screens/review/model/review_model.dart';
-import 'package:streamit_laravel/utils/common_functions.dart';
-import 'package:streamit_laravel/utils/constants.dart';
+import 'package:apexprime_tv/ads/managers/ad_manager.dart';
+import 'package:apexprime_tv/main.dart';
+import 'package:apexprime_tv/screens/review/model/review_model.dart';
+import 'package:apexprime_tv/utils/common_functions.dart';
+import 'package:apexprime_tv/utils/constants.dart';
 
 class ContentResponse {
   bool status;
