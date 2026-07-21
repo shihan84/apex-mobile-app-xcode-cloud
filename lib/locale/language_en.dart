@@ -739,7 +739,7 @@ class LanguageEn extends BaseLanguage {
   String get whatYourMobileNo => "What's Your Mobile Number";
 
   @override
-  String get withAValidMobileNumberYouCanConnectWithApexPrime Tv => 'With a valid mobile number you can connect with ApexPrimeTV';
+  String get withAValidMobileNumberYouCanConnectWithApexPrimeTv => 'With a valid mobile number you can connect with ApexPrimeTV';
 
   @override
   String get otpSentToYourSMS => 'OTP Sent To Your SMS!';

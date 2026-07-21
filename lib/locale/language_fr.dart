@@ -733,7 +733,7 @@ class LanguageFr extends BaseLanguage {
   String get whatYourMobileNo => 'Quel est votre numéro de portable';
 
   @override
-  String get withAValidMobileNumberYouCanConnectWithApexPrime Tv => 'Avec un numéro de mobile valide, vous pouvez vous connecter avec ApexPrimeTv';
+  String get withAValidMobileNumberYouCanConnectWithApexPrimeTv => 'Avec un numéro de mobile valide, vous pouvez vous connecter avec ApexPrimeTv';
 
   @override
   String get otpSentToYourSMS => 'OTP envoyé à votre SMS !';

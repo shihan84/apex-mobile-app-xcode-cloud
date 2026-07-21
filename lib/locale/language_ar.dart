@@ -733,7 +733,7 @@ class LanguageAr extends BaseLanguage {
   String get whatYourMobileNo => 'ما هو رقم هاتفك المحمول';
 
   @override
-  String get withAValidMobileNumberYouCanConnectWithApexPrime Tv => 'باستخدام رقم هاتف محمول صالح، يمكنك الاتصال بـApexPrimeTv';
+  String get withAValidMobileNumberYouCanConnectWithApexPrimeTv => 'باستخدام رقم هاتف محمول صالح، يمكنك الاتصال بـApexPrimeTv';
 
   @override
   String get otpSentToYourSMS => 'تم إرسال OTP إلى الرسائل القصيرة الخاصة بك!';

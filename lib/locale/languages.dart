@@ -492,7 +492,7 @@ abstract class BaseLanguage {
 
   String get whatYourMobileNo;
 
-  String get withAValidMobileNumberYouCanConnectWithApexPrime Tv;
+  String get withAValidMobileNumberYouCanConnectWithApexPrimeTv;
 
   String get otpSentToYourSMS;
 

@@ -733,7 +733,7 @@ class LanguageDe extends BaseLanguage {
   String get whatYourMobileNo => 'Wie lautet Ihre Handynummer?';
 
   @override
-  String get withAValidMobileNumberYouCanConnectWithApexPrime Tv => 'Mit einer gültigen Handynummer können Sie sich mit ApexPrimeTv verbinden';
+  String get withAValidMobileNumberYouCanConnectWithApexPrimeTv => 'Mit einer gültigen Handynummer können Sie sich mit ApexPrimeTv verbinden';
 
   @override
   String get otpSentToYourSMS => 'OTP an Ihre SMS gesendet!';

@@ -732,7 +732,7 @@ class LanguageEl extends BaseLanguage {
   String get whatYourMobileNo => 'Ποιος είναι ο αριθμός κινητού σας';
 
   @override
-  String get withAValidMobileNumberYouCanConnectWithApexPrime Tv => 'Με έναν έγκυρο αριθμό κινητού μπορείτε να συνδεθείτε με το ApexPrime Tv';
+  String get withAValidMobileNumberYouCanConnectWithApexPrimeTv => 'Με έναν έγκυρο αριθμό κινητού μπορείτε να συνδεθείτε με το ApexPrimeTv';
 
   @override
   String get otpSentToYourSMS => 'Το OTP στάλθηκε στο SMS σας!';
