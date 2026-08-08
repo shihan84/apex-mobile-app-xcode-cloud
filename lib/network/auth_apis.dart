@@ -19,7 +19,7 @@ class AuthServiceApis {
   }
 
   static Future<void> loginUser({required Map<String, dynamic> request, bool isSocialLogin = false}) async {
-    if (await isVarchaswaaProduct && (request[ApiRequestKeys.mobile] == Constants.defaultNumber || request[ApiRequestKeys.email] == Constants.DEFAULT_EMAIL)) {
+    if (await isVarchaswaaProduct && (request[ApiRequestKeys.mobile] == Constants.defaultNumber || request[ApiRequestKeys.email] == appConfigs.value.demoEmail || request[ApiRequestKeys.email] == Constants.DEFAULT_EMAIL)) {
       setBoolToLocal(SharedPreferenceConst.IS_DEMO_USER, true);
     }
     setStringToLocal(SharedPreferenceConst.USER_PASSWORD, request[ApiRequestKeys.password]);

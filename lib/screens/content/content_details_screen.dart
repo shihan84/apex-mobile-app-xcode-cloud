@@ -359,7 +359,7 @@ class ContentDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                               ],
-                              if (contentDetailsController.content.value!.isDownloadDetailsAvailable && contentDetailsController.content.value!.details.access != MovieAccess.payPerView)
+                              if (appConfigs.value.isDownloadAvailable && contentDetailsController.content.value!.isDownloadDetailsAvailable && contentDetailsController.content.value!.details.access != MovieAccess.payPerView)
                                 DownloadActionButton(
                                   controller: contentDetailsController,
                                   downloadButtonKey: _mainDownloadButtonKey,
@@ -538,7 +538,8 @@ class ContentDetailsScreen extends StatelessWidget {
                                       itemBuilder: (context, index) {
                                         PosterDataModel episodeData = episodeItems[index];
                                         final downloadData = episodeData.downloadData;
-                                        final bool isEpisodeDownloadable = downloadData != null &&
+                                        final bool isEpisodeDownloadable = appConfigs.value.isDownloadAvailable &&
+                                            downloadData != null &&
                                             downloadData.downloadEnable.getBoolInt() &&
                                             downloadData.isDownloadQualitiesAvailable &&
                                             episodeData.details.access != MovieAccess.payPerView;

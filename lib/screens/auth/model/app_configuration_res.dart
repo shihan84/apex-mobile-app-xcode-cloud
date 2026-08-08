@@ -26,6 +26,8 @@ class ConfigurationResponse {
   bool isAppleSocialLoginEnabled;
   bool isForceUpdate;
   bool enableDemoLogin;
+  String demoEmail;
+  String demoPassword;
   MobileApp? mobileApp;
   TvApp? tvApp;
   BannerAds bannerAds;
@@ -57,6 +59,8 @@ class ConfigurationResponse {
     this.isAppleSocialLoginEnabled = true,
     this.isForceUpdate = false,
     this.enableDemoLogin = true,
+    this.demoEmail = '',
+    this.demoPassword = '',
     this.mobileApp,
     this.tvApp,
     required this.bannerAds,
@@ -90,6 +94,8 @@ class ConfigurationResponse {
       isOtpLoginEnabled: json['otp_login_status'] is int ? (json['otp_login_status'] as int).getBoolInt() : false,
       isForceUpdate: json['force_update'] is int ? (json['force_update'] as int).getBoolInt() : false,
       enableDemoLogin: json['enable_demo_login'] is int ? (json['enable_demo_login'] as int).getBoolInt() : true,
+      demoEmail: json['demo_email'] is String ? json['demo_email'] : Constants.DEFAULT_EMAIL,
+      demoPassword: json['demo_password'] is String ? json['demo_password'] : Constants.DEFAULT_PASS,
       mobileApp: json['mobile_app'] is Map ? MobileApp.fromJson(json['mobile_app']) : MobileApp(android: AndroidMobileVersionDetails(), ios: IosMobileVersionDetails()),
       tvApp: json['tv_app'] is Map ? TvApp.fromJson(json['tv_app']) : TvApp(androidTv: AndroidTvVersionDetails()),
       bannerAds: json['banner_ads'] is Map ? BannerAds.fromJson(json['banner_ads']) : BannerAds(),
@@ -127,6 +133,8 @@ class ConfigurationResponse {
       'otp_login_status': isOtpLoginEnabled ? 1 : 0,
       'force_update': isForceUpdate ? 1 : 0,
       'enable_demo_login': enableDemoLogin ? 1 : 0,
+      'demo_email': demoEmail,
+      'demo_password': demoPassword,
       'video_forward_seek_seconds': forwardSeekSeconds,
       'video_backward_seek_seconds': backwardSeekSeconds,
       'date_format': dateFormate

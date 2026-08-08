@@ -50,8 +50,12 @@ import 'constants.dart';
 
 ///DO NOT CHANGE THE APP PACKAGE NAME
 String appPackageName = 'com.varchaswaa.apexprimetv';
+String appIOSBundleId = 'com.apexprime.ott';
 
-Future<bool> get isVarchaswaaProduct async => await getPackageName() == appPackageName;
+Future<bool> get isVarchaswaaProduct async {
+  final packageName = await getPackageName();
+  return packageName == appPackageName || packageName == appIOSBundleId;
+}
 
 RxString selectedLanguageCode = DEFAULT_LANGUAGE.obs;
 RxBool isLoggedIn = false.obs;

@@ -75,14 +75,14 @@ class SignInController extends BaseController {
   }
 
   Future<void> _applyDemoCredentialState() async {
-    final bool shouldShowDemoCredentials = appConfigs.value.enableDemoLogin && await isVarchaswaaProduct;
+    final bool shouldShowDemoCredentials = appConfigs.value.enableDemoLogin;
 
     if (shouldShowDemoCredentials) {
-      emailCont.text = Constants.DEFAULT_EMAIL;
-      passwordCont.text = Constants.DEFAULT_PASS;
+      emailCont.text = appConfigs.value.demoEmail.isNotEmpty ? appConfigs.value.demoEmail : Constants.DEFAULT_EMAIL;
+      passwordCont.text = appConfigs.value.demoPassword.isNotEmpty ? appConfigs.value.demoPassword : Constants.DEFAULT_PASS;
     } else {
-      if (emailCont.text == Constants.DEFAULT_EMAIL) emailCont.clear();
-      if (passwordCont.text == Constants.DEFAULT_PASS) passwordCont.clear();
+      if (emailCont.text == Constants.DEFAULT_EMAIL || (appConfigs.value.demoEmail.isNotEmpty && emailCont.text == appConfigs.value.demoEmail)) emailCont.clear();
+      if (passwordCont.text == Constants.DEFAULT_PASS || (appConfigs.value.demoPassword.isNotEmpty && passwordCont.text == appConfigs.value.demoPassword)) passwordCont.clear();
     }
     getBtnEnable();
   }

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:apexprime_tv/generated/assets.dart';
 
 class Constants {
-  static const DEFAULT_EMAIL = 'john@gmail.com';
-  static const DEFAULT_PASS = '12345678';
+  static const DEFAULT_EMAIL = 'alikhan6677665@gmail.com';
+  static const DEFAULT_PASS = '87654321';
 
   static const episodePerPage = 5;
   static const int mobilePerPage = 15;
