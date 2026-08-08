@@ -44,13 +44,7 @@
         android:resizeableActivity="true">
 
         <!-- ================= Large Screen Support ================= -->
-        <meta-data
-            android:name="android.max_aspect"
-            android:value="2.4" />
-        
-        <meta-data
-            android:name="android.min_aspect"
-            android:value="1.0" />
+        <!-- Removed deprecated max_aspect/min_aspect restrictions so app supports all large screens and foldables. -->
 
         <!-- ================= Firebase Notifications ================= -->
         <meta-data
@@ -83,7 +77,6 @@
             android:windowSoftInputMode="adjustResize"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:resizeableActivity="true"
-            android:screenOrientation="unspecified"
             android:requestLegacyExternalStorage="true">
 
             <!-- Flutter Normal Theme -->

@@ -24,7 +24,6 @@ class AppTheme {
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.light,
-        statusBarColor: Colors.transparent,
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     ),
