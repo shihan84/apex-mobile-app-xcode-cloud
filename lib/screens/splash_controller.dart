@@ -16,6 +16,7 @@ import 'package:apexprime_tv/utils/common_functions.dart';
 import '../utils/constants.dart';
 import 'dashboard/dashboard_screen.dart';
 import 'live_tv/live_tv_details/live_tv_details_screen.dart';
+import 'splash/app_open_ad_screen.dart';
 
 class SplashScreenController extends BaseListController<WalkthroughModel> {
   RxBool appNotSynced = false.obs;
@@ -72,22 +73,7 @@ class SplashScreenController extends BaseListController<WalkthroughModel> {
             // Wait a minimal delay for UI to settle, then navigate
             await Future.delayed(
               const Duration(milliseconds: 500),
-              () async {
-                // Ensure config is loaded before navigating
-                if (appConfigs.value.status == false && appNotSynced.value) {
-                  // Config failed to load, but we have fallback defaults
-                  log('Using fallback configuration');
-                }
-
-                if (await getBoolFromLocal(SharedPreferenceConst.IS_FIRST_TIME, defaultValue: true)) {
-                  Get.off(() => WalkThroughScreen(walkthroughPageList: listContent));
-                  await setBoolToLocal(SharedPreferenceConst.IS_FIRST_TIME, false);
-                } else if (await getBoolFromLocal(SharedPreferenceConst.IS_LOGGED_IN, defaultValue: false) || isLoggedIn.value) {
-                  Get.off(() => WatchingProfileScreen(), arguments: true);
-                } else {
-                  Get.offAll(() => DashboardScreen(), duration: const Duration(milliseconds: 500), curve: Curves.linearToEaseOut);
-                }
-              },
+              () => navigateFromSplash(),
             );
           },
         ).catchError((e) async {
@@ -96,16 +82,7 @@ class SplashScreenController extends BaseListController<WalkthroughModel> {
           // Navigate anyway with fallback config
           await Future.delayed(
             const Duration(milliseconds: 500),
-            () async {
-              if (await getBoolFromLocal(SharedPreferenceConst.IS_FIRST_TIME, defaultValue: true)) {
-                Get.off(() => WalkThroughScreen(walkthroughPageList: listContent));
-                await setBoolToLocal(SharedPreferenceConst.IS_FIRST_TIME, false);
-              } else if (await getBoolFromLocal(SharedPreferenceConst.IS_LOGGED_IN, defaultValue: false) || isLoggedIn.value) {
-                Get.off(() => WatchingProfileScreen(), arguments: true);
-              } else {
-                Get.offAll(() => DashboardScreen(), duration: const Duration(milliseconds: 500), curve: Curves.linearToEaseOut);
-              }
-            },
+            () => navigateFromSplash(),
           );
         }),
       ],
@@ -117,6 +94,40 @@ class SplashScreenController extends BaseListController<WalkthroughModel> {
         () => Get.offAll(() => DashboardScreen(), duration: const Duration(milliseconds: 500), curve: Curves.linearToEaseOut),
       );
     });
+  }
+
+  /// Decides the next screen after splash and optionally shows an app-open ad first.
+  Future<void> navigateFromSplash() async {
+    if (appConfigs.value.status == false && appNotSynced.value) {
+      log('Using fallback configuration');
+    }
+
+    final bool isFirstTime = await getBoolFromLocal(SharedPreferenceConst.IS_FIRST_TIME, defaultValue: true);
+    final bool userLoggedIn = await getBoolFromLocal(SharedPreferenceConst.IS_LOGGED_IN, defaultValue: false) || isLoggedIn.value;
+
+    Future<void> goToNext() async {
+      if (isFirstTime) {
+        Get.off(() => WalkThroughScreen(walkthroughPageList: listContent));
+        await setBoolToLocal(SharedPreferenceConst.IS_FIRST_TIME, false);
+      } else if (userLoggedIn) {
+        Get.off(() => WatchingProfileScreen(), arguments: true);
+      } else {
+        Get.offAll(() => DashboardScreen(), duration: const Duration(milliseconds: 500), curve: Curves.linearToEaseOut);
+      }
+    }
+
+    // Show app-open custom ad if configured
+    if (appConfigs.value.appOpenAd.isAvailable) {
+      Get.off(
+        () => AppOpenAdScreen(
+          ad: appConfigs.value.appOpenAd,
+          onCompleted: goToNext,
+        ),
+      );
+      return;
+    }
+
+    await goToNext();
   }
 
   void handleDeepLinking({required String deepLink}) {

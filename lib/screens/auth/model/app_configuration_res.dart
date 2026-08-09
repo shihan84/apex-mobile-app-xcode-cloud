@@ -31,6 +31,7 @@ class ConfigurationResponse {
   MobileApp? mobileApp;
   TvApp? tvApp;
   BannerAds bannerAds;
+  AppOpenAd appOpenAd;
   int forwardSeekSeconds;
   int backwardSeekSeconds;
   String dateFormate;
@@ -64,6 +65,7 @@ class ConfigurationResponse {
     this.mobileApp,
     this.tvApp,
     required this.bannerAds,
+    this.appOpenAd = const AppOpenAd(),
     this.forwardSeekSeconds = 10,
     this.backwardSeekSeconds = 10,
     this.dateFormate = 'Y-m-d',
@@ -99,6 +101,7 @@ class ConfigurationResponse {
       mobileApp: json['mobile_app'] is Map ? MobileApp.fromJson(json['mobile_app']) : MobileApp(android: AndroidMobileVersionDetails(), ios: IosMobileVersionDetails()),
       tvApp: json['tv_app'] is Map ? TvApp.fromJson(json['tv_app']) : TvApp(androidTv: AndroidTvVersionDetails()),
       bannerAds: json['banner_ads'] is Map ? BannerAds.fromJson(json['banner_ads']) : BannerAds(),
+      appOpenAd: json['app_open_ad'] is Map ? AppOpenAd.fromJson(json['app_open_ad']) : const AppOpenAd(),
       forwardSeekSeconds: json['video_forward_seek_seconds'] is int ? json['video_forward_seek_seconds'] : 10,
       backwardSeekSeconds: json['video_backward_seek_seconds'] is int ? json['video_backward_seek_seconds'] : 10,
       dateFormate: json['date_format'] is String ? json['date_format'] : 'Y-m-d',
@@ -127,6 +130,7 @@ class ConfigurationResponse {
       'mobile_app': mobileApp?.toJson(),
       'tv_app': tvApp?.toJson(),
       'banner_ads': bannerAds.toJson(),
+      'app_open_ad': appOpenAd.toJson(),
       'is_download_available': isDownloadAvailable ? 1 : 0,
       'google_login_status': isGoogleLoginEnabled ? 1 : 0,
       'apple_login_status': isAppleSocialLoginEnabled ? 1 : 0,
@@ -423,6 +427,48 @@ class BannerAds {
     return {
       'ios_banner_ad_id': iosBannerAdId,
       'android_banner_ad_id': androidBannerAdId,
+    };
+  }
+}
+
+class AppOpenAd {
+  final String type;
+  final String url;
+  final String redirectUrl;
+  final int duration;
+  final bool skipEnabled;
+  final int skipAfter;
+
+  bool get isAvailable => url.isNotEmpty;
+
+  const AppOpenAd({
+    this.type = '',
+    this.url = '',
+    this.redirectUrl = '',
+    this.duration = 0,
+    this.skipEnabled = false,
+    this.skipAfter = 0,
+  });
+
+  factory AppOpenAd.fromJson(Map<String, dynamic> json) {
+    return AppOpenAd(
+      type: json['type'] is String ? json['type'] : '',
+      url: json['url'] is String ? json['url'] : '',
+      redirectUrl: json['redirect_url'] is String ? json['redirect_url'] : '',
+      duration: json['duration'] is int ? json['duration'] : 0,
+      skipEnabled: json['skip_enabled'] is bool ? json['skip_enabled'] : false,
+      skipAfter: json['skip_after'] is int ? json['skip_after'] : 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'type': type,
+      'url': url,
+      'redirect_url': redirectUrl,
+      'duration': duration,
+      'skip_enabled': skipEnabled,
+      'skip_after': skipAfter,
     };
   }
 }
