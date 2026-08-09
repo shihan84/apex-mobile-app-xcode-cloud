@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:apexprime_tv/ads/custom_ads/ad_player.dart';
 import 'package:apexprime_tv/components/cached_image_widget.dart';
+import 'package:apexprime_tv/main.dart';
 import 'package:apexprime_tv/screens/auth/model/app_configuration_res.dart';
 import 'package:apexprime_tv/utils/colors.dart';
 import 'package:apexprime_tv/utils/common_functions.dart';
