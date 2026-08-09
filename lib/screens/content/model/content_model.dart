@@ -162,6 +162,7 @@ class ContentModel {
       videoQualities: json['video_qualities'] is List ? List<VideoData>.from(json['video_qualities'].map((x) => VideoData.fromQualityJson(x))) : [],
       suggestedContent: json['suggested_content'] is List ? List<PosterDataModel>.from(json['suggested_content'].map((x) => PosterDataModel.fromPosterJson(x))) : [],
       downloadData: DownloadDataModel(downloadQualities: []),
+      adsData: json['ads_data'] is Map ? AdsData.fromJson(json['ads_data']) : null,
     );
   }
 
