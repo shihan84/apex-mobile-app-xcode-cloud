@@ -44,6 +44,15 @@ This document captures the findings and planned future work for adding ad suppor
    - Active status and valid start/end dates
 3. On next app launch, the ad will display before the home/walkthrough screen.
 
+### Homepage ad positions
+- Custom Ads now support placements `Home Page 1` through `Home Page 5`.
+- The app inserts each placement at a fixed dashboard section index:
+  - **Home Page 1** → position 0 (top of dashboard)
+  - **Home Page 2** → position 1
+  - **Home Page 3** → position 2 (legacy `Home Page` slot)
+  - **Home Page 4** → position 3
+  - **Home Page 5** → position 4
+
 ### Files changed
 - `mobile-app/lib/screens/splash/app_open_ad_screen.dart` (new)
 - `mobile-app/lib/screens/splash/splash_controller.dart`
