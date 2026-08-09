@@ -13,7 +13,7 @@ import 'package:apexprime_tv/utils/common_functions.dart';
 /// Supports image or video ads with optional skip-after timer.
 class AppOpenAdScreen extends StatefulWidget {
   final AppOpenAd ad;
-  final VoidCallback onCompleted;
+  final Future<void> Function() onCompleted;
 
   const AppOpenAdScreen({
     super.key,
@@ -72,9 +72,9 @@ class _AppOpenAdScreenState extends State<AppOpenAdScreen> {
     });
   }
 
-  void _finish() {
+  void _finish() async {
     _timer?.cancel();
-    widget.onCompleted();
+    await widget.onCompleted();
   }
 
   void _onTap() {
