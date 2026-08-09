@@ -268,14 +268,37 @@ class HomeController extends BaseController {
     );
 
     if (isAdsAllowed) {
-      addOrReplaceSection(
-        targetList: dashboardOtherDetailsSectionList,
-        newSection: CategoryListModel(
-          sectionType: DashboardCategoryType.customAd,
-          data: dashboard.customAdList,
-        ),
-        index: 2,
-      );
+      // Group homepage ads by placement so admins can control multiple positions.
+      final Map<String, List<CustomAds>> adsByPlacement = {};
+      for (final ad in dashboard.customAdList) {
+        final placement = ad.adType.isNotEmpty ? ad.adType : 'home_page';
+        adsByPlacement.putIfAbsent(placement, () => []).add(ad);
+      }
+
+      // Map placement slugs to dashboard section indices.
+      const placementIndexMap = {
+        'home_page_1': 0,
+        'home_page_2': 1,
+        'home_page_3': 2,
+        'home_page_4': 3,
+        'home_page_5': 4,
+        'home_page': 2, // legacy default
+      };
+
+      // Sort by index so lower-positioned ads are inserted first and keep ordering stable.
+      final sortedPlacements = adsByPlacement.entries.toList()
+        ..sort((a, b) => (placementIndexMap[a.key] ?? 99).compareTo(placementIndexMap[b.key] ?? 99));
+
+      for (final entry in sortedPlacements) {
+        addOrReplaceSection(
+          targetList: dashboardOtherDetailsSectionList,
+          newSection: CategoryListModel(
+            sectionType: DashboardCategoryType.customAd,
+            data: entry.value,
+          ),
+          index: placementIndexMap[entry.key] ?? 2,
+        );
+      }
     }
 
     // 🎬 Latest Movies
