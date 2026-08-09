@@ -95,6 +95,54 @@ Show a custom image or video ad on the splash screen before navigating to the ho
 
 ---
 
+## 4. Current Homepage Banner Ad / Rate Tab Issue
+
+### Current state
+- The bottom banner ad (`AdComponent`) and the rate-our-app section (`RateComponent`) are still present in the home screen code.
+- They are only inserted when the app config flags are enabled:
+  - Banner ad: `appConfigs.value.enableAds.getBoolInt()` is `true`
+  - Rate tab: `appConfigs.value.enableRateUs` is `true`
+- These flags come from backend `app-configuration-v3`:
+  - `enable_ads` = `MobileSetting` row with slug `banner`
+  - `enable_rate_us` = `MobileSetting` row with slug `rate-our-app`
+
+### Why they disappeared in the new build
+Most likely the backend `MobileSetting` rows for `banner` and/or `rate-our-app` are set to `0` (disabled) or not present.
+
+### How to restore them
+1. Log in to admin panel.
+2. Go to **Mobile App Settings** (or wherever `MobileSetting` slugs are managed).
+3. Ensure these settings are enabled:
+   - slug: `banner` → value `1`
+   - slug: `rate-our-app` → value `1`
+4. Re-launch the app. The banner will show real AdMob ads in release builds; the "Test Ad" label only appears in debug/test builds.
+
+### Note about "Test Ad" label
+- The "Test Ad" label is shown by AdMob only when the banner loads a **test ad unit ID** (debug builds).
+- In a release/production build, the label disappears and real ads are shown if valid AdMob IDs are configured.
+- If real ads do not load, the banner area collapses to zero height and nothing is shown.
+
+---
+
+## 5. Play Store 16 KB Device Warning (Fixed)
+
+### Warning
+```
+base/lib/arm64-v8a/libdatastore_shared_counter.so
+base/lib/x86_64/libdatastore_shared_counter.so
+```
+
+### Applied fix
+- `@/Users/macair/development/apexT/production/mobile-app/android/app/build.gradle`
+  - Added explicit 16 KB-aligned `androidx.datastore` dependencies (version `1.1.6`).
+  - Set `packagingOptions.jniLibs.useLegacyPackaging = false` to ensure native libraries are loaded directly from the APK with correct page alignment.
+
+### Verification
+- After the next Android build, re-upload the AAB to Play Console and check that the 16 KB warning is gone.
+- If the warning persists, also run `flutter pub upgrade shared_preferences` to pull the latest compatible Android implementation.
+
+---
+
 ## Notes
 - Do not implement these changes during the current App Store rejection resolution cycle unless necessary.
 - Both features should be built on a dedicated feature branch and tested before merging to `android` / `main`.
