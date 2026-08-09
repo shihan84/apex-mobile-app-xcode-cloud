@@ -58,6 +58,8 @@ android {
     packagingOptions {
         jniLibs {
             pickFirsts += ['lib/**/libc++_shared.so']
+            // 16 KB page alignment for prebuilt native libraries
+            useLegacyPackaging = false
         }
         // Exclude unnecessary files to reduce APK size
         exclude 'META-INF/DEPENDENCIES'
@@ -110,4 +112,10 @@ dependencies {
     implementation('com.google.android.exoplayer:exoplayer:2.19.1')
     implementation "com.android.billingclient:billing-ktx:7.1.1"
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
+
+    // 16 KB page-size alignment fix for libdatastore_shared_counter.so
+    implementation "androidx.datastore:datastore-preferences:1.1.6"
+    implementation "androidx.datastore:datastore-preferences-core:1.1.6"
+    implementation "androidx.datastore:datastore-core:1.1.6"
+    implementation "androidx.datastore:datastore-core-android:1.1.6"
 }
