@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutterwave_standard/core/flutterwave.dart';
-import 'package:flutterwave_standard/models/requests/customer.dart';
-import 'package:flutterwave_standard/models/requests/customizations.dart';
+import 'package:apex_flutterwave/core/flutterwave.dart';
+import 'package:apex_flutterwave/models/requests/customer.dart';
+import 'package:apex_flutterwave/models/requests/customizations.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:apexprime_tv/configs.dart';
 import 'package:apexprime_tv/main.dart';

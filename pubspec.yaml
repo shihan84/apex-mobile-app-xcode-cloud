@@ -52,20 +52,20 @@ dependencies:
   flutter_stripe: ^12.1.1
   razorpay_flutter: ^1.4.0
   uuid: ^4.5.2
-  flutterwave_standard:
-    git:
-      url: https://github.com/iqonic-design/flutterwave_standard.git
-      ref: main
+  apex_flutterwave:
+    path: packages/flutterwave_standard
 
-  flutter_paystack:
-    git:
-      url: https://github.com/iqonic-design/flutter_paystack.git
-      ref: 1.5.1
 
-  flutter_paypal_checkout:
-    git:
-      url: https://github.com/iqonic-design/flutter_paypal_checkout.git
-      ref: main
+
+  apex_paystack:
+    path: packages/flutter_paystack
+
+
+
+  apex_paypal_checkout:
+    path: packages/flutter_paypal_checkout
+
+
 
   purchases_flutter: ^9.10.1
   # Social Login

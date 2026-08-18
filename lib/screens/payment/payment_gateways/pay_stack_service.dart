@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_paystack/flutter_paystack.dart';
+import 'package:apex_paystack/flutter_paystack.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:apexprime_tv/configs.dart';

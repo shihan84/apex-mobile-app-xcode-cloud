@@ -33,6 +33,27 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  apex_flutterwave:
+    dependency: "direct main"
+    description:
+      path: "packages/flutterwave_standard"
+      relative: true
+    source: path
+    version: "1.0.8"
+  apex_paypal_checkout:
+    dependency: "direct main"
+    description:
+      path: "packages/flutter_paypal_checkout"
+      relative: true
+    source: path
+    version: "1.0.2"
+  apex_paystack:
+    dependency: "direct main"
+    description:
+      path: "packages/flutter_paystack"
+      relative: true
+    source: path
+    version: "1.0.0"
   archive:
     dependency: transitive
     description:
@@ -643,24 +664,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_paypal_checkout:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: main
-      resolved-ref: "0fd819dd0ffcea9b04ea306fc67a7afdd21bf2f5"
-      url: "https://github.com/iqonic-design/flutter_paypal_checkout.git"
-    source: git
-    version: "1.0.2"
-  flutter_paystack:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: "1.5.1"
-      resolved-ref: e72beea5a27e33896e4de5b016b68198c7b5c196
-      url: "https://github.com/iqonic-design/flutter_paystack.git"
-    source: git
-    version: "1.0.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -767,15 +770,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "8.2.14"
-  flutterwave_standard:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: main
-      resolved-ref: b9458abfd1a189c4e692ce3f16f45d4258a54a77
-      url: "https://github.com/iqonic-design/flutterwave_standard.git"
-    source: git
-    version: "1.0.8"
   freezed_annotation:
     dependency: transitive
     description:
